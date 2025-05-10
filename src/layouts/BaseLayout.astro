@@ -1,0 +1,17 @@
+---
+import '../styles/global.css';
+---
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <slot name="header" />
+  </header>
+  <main>
+    <slot />
+  </main>
+  <footer>
+    <slot name="footer" />
+  </footer>
+</body>
