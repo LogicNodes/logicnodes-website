@@ -1,5 +1,6 @@
 ---
 import { Zap, BanknoteArrowDown, ChartPie } from '../icons';
+import NeuralGraph from './NeuralGraph.astro';
 ---
 <section class="bg-ln-light py-section px-gutter">
   <!-- Hero Row -->
@@ -28,14 +29,10 @@ import { Zap, BanknoteArrowDown, ChartPie } from '../icons';
       </div>
     </div>
 
-    <!-- Right: Image flush to right, square left edge -->
-    <div class="flex-1 w-full max-w-[600px]">
-      <img
-        src="/hero-image.png"
-        alt="Hero"
-        class="w-full h-full object-cover rounded-r-3xl lg:rounded-l-none"
-      />
-    </div>
+  <!-- Right: Node Network Graphic -->
+  <div class="flex-1 w-full max-w-[600px]">
+    <NeuralGraph />
+  </div>
   </div>
 
   <!-- Selling Points -->
