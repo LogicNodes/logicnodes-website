@@ -1,1 +1,27 @@
-<nav>Menu</nav>
+---
+// src/components/Navbar.astro
+---
+<nav class="w-full bg-ln-light shadow-sm">
+    <div class="max-w-7xl mx-auto px-gutter py-4 flex items-center justify-between">
+      <!-- Left: Logo -->
+      <a href="/" class="flex items-center gap-2">
+        <img src="/logo.svg" alt="LogicNodes Logo" class="h-12 w-auto" />
+      </a>
+  
+      <!-- Right: Navigation -->
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#specialloesninger" class="text-ln-dark hover:text-ln-accent font-medium">Specialløsninger</a>
+        <a href="#jobside" class="text-ln-dark hover:text-ln-accent font-medium">Jobside</a>
+        <a href="#videnscenter" class="text-ln-dark hover:text-ln-accent font-medium">Videnscenter</a>
+  
+        <!-- CTA Button -->
+        <a
+          href="#kontakt"
+          class="bg-ln-accent text-white font-semibold py-2.5 px-5 rounded-2xl text-sm hover:bg-orange-500 transition"
+        >
+          Kontakt os
+        </a>
+      </div>
+    </div>
+  </nav>
+  
