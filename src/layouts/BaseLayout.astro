@@ -1,11 +1,16 @@
 ---
+// src/layouts/BaseLayout.astro
 import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
 ---
 <head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
 </head>
-<body>
+<body class="bg-ln-light text-ln-dark">
+  <Navbar />
+
   <header>
     <slot name="header" />
   </header>
