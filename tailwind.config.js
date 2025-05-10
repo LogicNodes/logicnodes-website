@@ -1,6 +1,5 @@
-import { defineConfig } from 'tailwindcss'
-
-export default defineConfig({
+// tailwind.config.js
+module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
@@ -18,8 +17,8 @@ export default defineConfig({
         'heading-xl': ['2.5rem', { lineHeight: '1.2' }],
         'heading-lg': ['2rem', { lineHeight: '1.3' }],
         'heading-md': ['1.5rem', { lineHeight: '1.4' }],
-        'body': ['1rem', { lineHeight: '1.75' }],
-        'sm': ['0.875rem', { lineHeight: '1.5' }],
+        body: ['1rem', { lineHeight: '1.75' }],
+        sm: ['0.875rem', { lineHeight: '1.5' }],
       },
       spacing: {
         section: '5rem',
@@ -27,4 +26,4 @@ export default defineConfig({
       },
     },
   },
-});
+};
