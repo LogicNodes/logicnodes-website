@@ -68,31 +68,127 @@ export type GraphNode = {
   }
   
   export const NODES: GraphNode[] = [
-    // ─── Layer 0: Entry Point ───
-    { id: 'root', x: 80, y: 200, icon: 'logicnodes', info: { title: 'LogicNodes', text: 'LogicNodes can help you orchestrate your AI workflows' } },
+    // ─── Lag 0: Indgangspunkt ───
+    {
+      id: 'root', x: 80, y: 200, icon: 'logicnodes',
+      info: {
+        title: 'LogicNodes',
+        text: 'LogicNodes hjælper dig med at orkestrere og automatisere AI-processer.'
+      }
+    },
   
-    // ─── Layer 1: Inputs ───
-    { id: 'a', x: 180, y: 100, icon: 'email', info: { title: 'Email', text: 'Let AI take actions on incoming emails' } },
-    { id: 'b', x: 180, y: 200, icon: 'ear', info: { title: 'Listening', text: 'Transcribe meetings and act on them' } },
-    { id: 'c', x: 180, y: 300, icon: 'graduation', info: { title: 'Knowledge', text: 'AI experts on legislation and policy' } },
+    // ─── Lag 1: Inputkilder ───
+    {
+      id: 'a', x: 180, y: 100, icon: 'email',
+      info: {
+        title: 'Email',
+        text: 'Lad AI læse og reagere intelligent på indkommende mails'
+      }
+    },
+    {
+      id: 'b', x: 180, y: 200, icon: 'ear',
+      info: {
+        title: 'Lytte',
+        text: 'Transskriber møder og lad AI tage handling baseret på indholdet'
+      }
+    },
+    {
+      id: 'c', x: 180, y: 300, icon: 'graduation',
+      info: {
+        title: 'Viden',
+        text: 'Byg AI-agenter med ekspertviden om lovgivning og regler inden for din branche'
+      }
+    },
   
-    // ─── Layer 2: Processing ───
-    { id: 'd1', x: 280, y: 70, icon: 'image', info: { title: 'Images', text: 'Extract data from images' } },
-    { id: 'd2', x: 280, y: 160, icon: 'folder', info: { title: 'Documents', text: 'Read and reason over documents' } },
-    { id: 'd3', x: 280, y: 240, icon: 'gear', info: { title: 'Automation', text: 'Automate repetitive tasks' } },
-    { id: 'd4', x: 280, y: 330, icon: 'workflow', info: { title: 'Workflows', text: 'Connect agents into flows' } },
+    // ─── Lag 2: Databehandling ───
+    {
+      id: 'd1', x: 280, y: 70, icon: 'image',
+      info: {
+        title: 'Billeder',
+        text: 'Udtræk og analyser information fra billeder og visuelle dokumenter'
+      }
+    },
+    {
+      id: 'd2', x: 280, y: 160, icon: 'folder',
+      info: {
+        title: 'Dokumenter',
+        text: 'Læs, forstå og konkludér ud fra interne dokumenter og mapper'
+      }
+    },
+    {
+      id: 'd3', x: 280, y: 240, icon: 'gear',
+      info: {
+        title: 'Automatisering',
+        text: 'Automatisér gentagne manuelle opgaver, så medarbejderne kan fokusere på mere værdiskabende arbejde'
+      }
+    },
+    {
+      id: 'd4', x: 280, y: 330, icon: 'workflow',
+      info: {
+        title: 'Arbejdsgange',
+        text: 'Kombinér flere AI-agenter i en sammenhængende arbejdsgang'
+      }
+    },
   
-    // ─── Layer 3: Reasoning ───
-    { id: 'e1', x: 380, y: 70, icon: 'search', info: { title: 'Classification', text: 'Organize and categorize incoming data' } },
-    { id: 'e2', x: 380, y: 160, icon: 'sync', info: { title: 'Sync', text: 'Sync data back into internal systems' } },
-    { id: 'e3', x: 380, y: 240, icon: 'decisions', info: { title: 'Decisions', text: 'Make structured decisions across inputs' } },
-    { id: 'e4', x: 380, y: 330, icon: 'person', info: { title: 'Oversight', text: 'Human verification of AI actions' } },
+    // ─── Lag 3: Analyse og beslutning ───
+    {
+      id: 'e1', x: 380, y: 70, icon: 'search',
+      info: {
+        title: 'Berigelse',
+        text: 'Berig eksisterende data med information fra eksterne kilder og data'
+      }
+    },
+    {
+      id: 'e2', x: 380, y: 160, icon: 'sync',
+      info: {
+        title: 'Synkronisering',
+        text: 'Opdatér dine interne systemer med ny og relevant information'
+      }
+    },
+    {
+      id: 'e3', x: 380, y: 240, icon: 'decisions',
+      info: {
+        title: 'Beslutninger',
+        text: 'Lad AI træffe intelligente beslutninger på baggrund af data og kontekst'
+      }
+    },
+    {
+      id: 'e4', x: 380, y: 330, icon: 'person',
+      info: {
+        title: 'Tilsyn',
+        text: 'Indbyg menneskelig kontrol, så AI-beslutninger kan godkendes manuelt'
+      }
+    },
   
-    // ─── Layer 4: Action ───
-    { id: 'f1', x: 480, y: 70, icon: 'send', info: { title: 'Send', text: 'Send emails or messages' } },
-    { id: 'f2', x: 480, y: 160, icon: 'action', info: { title: 'Action', text: 'Trigger external systems' } },
-    { id: 'f3', x: 480, y: 240, icon: 'notify', info: { title: 'Notify', text: 'Timely alerts or digests' } },
-    { id: 'f4', x: 480, y: 330, icon: 'report', info: { title: 'Report', text: 'Generate summaries or final outputs' } },
+    // ─── Lag 4: Handling ───
+    {
+      id: 'f1', x: 480, y: 70, icon: 'send',
+      info: {
+        title: 'Send',
+        text: 'Send e-mails eller beskeder automatisk fra AI-agenten'
+      }
+    },
+    {
+      id: 'f2', x: 480, y: 160, icon: 'action',
+      info: {
+        title: 'Handling',
+        text: 'Udløs eksterne handlinger i andre systemer, f.eks. CRM, ERP eller API-kald'
+      }
+    },
+    {
+      id: 'f3', x: 480, y: 240, icon: 'notify',
+      info: {
+        title: 'Notifikation',
+        text: 'Send alarmer, påmindelser eller daglige opdateringer til brugerne'
+      }
+    },
+    {
+      id: 'f4', x: 480, y: 330, icon: 'report',
+      info: {
+        title: 'Rapport',
+        text: 'Generér konklusioner, opsummeringer eller eksportér data i rapportform'
+      }
+    },  
   
     // ─── Layer 5: Output ───
     { id: 'g1', x: 580, y: 70 },
