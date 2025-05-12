@@ -27,6 +27,7 @@ import React, {
     x: number
     y: number
     tx: string
+    ty: string
   } | null
   
   /**
@@ -86,7 +87,7 @@ import React, {
   
     // Center the graph on initial render
     useEffect(() => {
-      fgRef.current.centerAt(370, 200, 0); // was 280
+      fgRef.current.centerAt(380, 200, 0); // was 280
       fgRef.current.zoom(1.8, 0);
     }, []);
   
@@ -183,6 +184,12 @@ import React, {
   
       // Determine circle radius
       const radius = isHovered ? SIZE.rHover : SIZE.r;
+      
+      // Add a drop shadow
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 4;
   
       // 1) background circle
       ctx.beginPath();
@@ -190,6 +197,12 @@ import React, {
       ctx.fillStyle = GRAPH_COLORS.node;
       ctx.fill();
   
+      // Clear shadow for the stroke and icon
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      
       // optional accent ring on hover
       if (isHovered) {
         ctx.lineWidth = SIZE.stroke;
@@ -274,17 +287,29 @@ import React, {
     
       // 2. Decide how to anchor the tooltip so it never overflows
       const container = containerRef.current!;
-      const PAD = 16;                         // px from edges
-      const BOX_W = 260;                      // tooltip max-width
-      let tx = '-50%';                        // default: center
-      if (sx < PAD + BOX_W / 2)   tx = '0';   // too close to left → align left
-      if (sx > container.offsetWidth - PAD - BOX_W / 2) tx = '-100%'; // right edge
+      const PAD   = 16;    // px from edges
+      const BOX_W = 260;   // tooltip max-width
+      const BOX_H = 90;    // ≈ tooltip height (tweak if yours is taller)
+
+      // ---------- horizontal anchoring ----------
+      let tx = '-50%';                               // centred
+      if (sx < PAD + BOX_W / 2)                      // too close to left edge
+        tx = '0';
+      if (sx > container.offsetWidth - PAD - BOX_W / 2) // right edge
+        tx = '-100%';
+
+      // ---------- vertical anchoring ----------
+      // default above the node
+      let ty = '-110%';
+      // not enough space? put it below instead
+      if (sy - 40 - BOX_H < PAD) ty = '10%';
     
       setHoverData({
         node,
         x: sx,
-        y: sy - 40,   // raise above the node
-        tx            // store chosen translate-X
+        y: sy - 40,
+        tx,
+        ty,
       });
     }
   
@@ -371,7 +396,7 @@ import React, {
             style={{
               left: hoverData.x,
               top:  hoverData.y,
-              transform: `translate(${hoverData.tx}, -110%)`
+              transform: `translate(${hoverData.tx}, ${hoverData.ty})`
             }}
           >
             <h3 className="text-heading-md mb-1">
