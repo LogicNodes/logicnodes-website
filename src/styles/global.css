@@ -7,3 +7,7 @@ body {
   margin: 2rem;
   background: #f9f9f9;
 }
+:root {
+  --tw-color-ln-dark: theme('colors.ln.dark');
+  --tw-color-ln-accent: theme('colors.ln.accent');
+}
