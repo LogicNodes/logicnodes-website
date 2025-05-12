@@ -2,11 +2,14 @@
 import { Zap, BanknoteArrowDown, ChartPie } from '../icons';
 import NeuralGraph from './NeuralGraph.tsx';
 ---
-<section class="bg-ln-light py-section px-gutter">
-  <!-- Hero Row -->
-  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-    <!-- Left: Heading + CTA -->
-    <div class="flex-1 flex flex-col justify-center text-ln-dark space-y-6">
+<section class="bg-ln-light py-section overflow-hidden px-gutter">
+  <!-- Grid: 1 column on mobile, 2 columns ≥lg -->
+  <div
+    class="max-w-7xl mx-auto grid gap-16
+           lg:grid-cols-[minmax(0,45%)_minmax(320px,55%)] lg:items-center">
+           
+    <!-- ── Column 1 ───────────── -->
+    <div class="space-y-6 text-ln-dark">
       <h1 class="text-[3rem] leading-tight font-extrabold">
         Højere produktivitet,<br />
         lavere omkostninger,<br />
@@ -29,10 +32,20 @@ import NeuralGraph from './NeuralGraph.tsx';
       </div>
     </div>
 
-  <!-- Right: Node Network Graphic -->
-  <div class="flex-1 w-full max-w-[600px]">
-    <NeuralGraph client:only="react" />
-  </div>
+    <!-- ── Column 2 (graph) ───── -->
+    <div
+      class="relative h-[550px]
+                 pointer-events-none
+                 overflow-hidden
+                 isolate
+                 -mr-[calc(55vw-55%)]
+                 hidden lg:block">
+
+      <!-- restore pointer events only to the canvas -->
+      <div class="pointer-events-auto w-full h-full">
+        <NeuralGraph client:only="react" />
+      </div>
+    </div>
   </div>
 
   <!-- Selling Points -->
