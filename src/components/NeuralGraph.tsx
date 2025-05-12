@@ -10,6 +10,16 @@ import React, {
   import ForceGraph2D, { type ForceGraphMethods } from 'react-force-graph-2d'
   import { NODES, LINKS, ICONS, GRAPH_COLORS, SIZE } from '../config/graph'
   
+  // --- constants -------------------------------------------------------------
+  const SPEED = 120;               // px / second that a pulse travels
+  const JITTER = 0.4;             // max extra seconds of random delay
+  const PULSES_PER_LINK = 3;       // how many rectangles you want per link
+
+  // Fast lookup: id → {x,y}
+  const NODE_POS = new Map<string, { x: number; y: number }>(
+    NODES.map(n => [n.id, { x: n.x, y: n.y }])
+  );
+  
   /** A small type helper to hold {node, x, y} for tooltip data. */
   type HoverData = {
     node: typeof NODES[number]
@@ -87,6 +97,43 @@ import React, {
       () => computeActiveLinks(hoveredNodeId, adjacency),
       [hoveredNodeId, adjacency]
     )
+    
+    // linkId → { start: seconds, duration: seconds }
+    const linkTimings = useMemo(() => {
+      if (!hoveredNodeId) return new Map<string, { start: number; duration: number }>();
+    
+      const timings = new Map<string, { start: number; duration: number }>();
+      const arrival = new Map<string, number>();
+      arrival.set(hoveredNodeId, 0);          // root node is "active" at t=0
+    
+      const q: string[] = [hoveredNodeId];
+    
+      while (q.length) {
+        const nid = q.shift()!;
+        const t0  = arrival.get(nid)!;        // when this node was reached
+        for (const child of adjacency.get(nid) ?? []) {
+          const linkId = `${nid}->${child}`;
+          if (timings.has(linkId)) continue;  // already scheduled
+    
+          // distance & travel time
+          const { x: sx, y: sy } = NODE_POS.get(nid)!;
+          const { x: tx, y: ty } = NODE_POS.get(child)!;
+          const dist = Math.hypot(tx - sx, ty - sy);
+          const travel = dist / SPEED;
+    
+          timings.set(linkId, { start: t0, duration: travel });
+          const childArrive = t0 + travel + Math.random() * JITTER;
+          if (!arrival.has(child)) {
+            arrival.set(child, childArrive);
+            q.push(child);
+          }
+        }
+      }
+      return timings;
+    }, [hoveredNodeId, adjacency]);
+    
+    const hoverStartRef = useRef<number>(0);
+    useEffect(() => { hoverStartRef.current = performance.now(); }, [hoveredNodeId]);
   
     // --- Cache icon images to prevent flicker ---
     const imagesCache = useMemo(() => {
@@ -170,30 +217,46 @@ import React, {
      * Optionally draw an animated "pulse" along outbound links that are active.
      * We'll do it in "after" mode so the normal edge line is already drawn.
      */
-    function drawLinkPulse(
-      link: any,
-      ctx: CanvasRenderingContext2D
-    ) {
-      // Is this link in the BFS set from the hovered node?
-      const linkId = `${link.source.id}->${link.target.id}`
-      if (!activeLinks.has(linkId)) return
-  
-      // The traveling pulse is at fraction = animT of the way from source->target
-      const sx = link.source.x
-      const sy = link.source.y
-      const tx = link.target.x
-      const ty = link.target.y
-  
-      // Interpolate
-      const pulseX = sx + (tx - sx) * animT
-      const pulseY = sy + (ty - sy) * animT
-  
-      // Draw the small traveling dot
-      ctx.beginPath()
-      ctx.arc(pulseX, pulseY, SIZE.pulse, 0, 2 * Math.PI, false)
-      ctx.fillStyle = GRAPH_COLORS.accent
-      ctx.fill()
-    }
+    function drawLinkPulse(link: any, ctx: CanvasRenderingContext2D) {
+      const linkId = `${link.source.id}->${link.target.id}`;
+      const sched  = linkTimings.get(linkId);
+      if (!sched) return;                                   // not in cascade
+    
+      const nowSec = (performance.now() - hoverStartRef.current) / 1000;
+      if (nowSec < sched.start) return;                     // not yet begun
+    
+      // progress in [0..1)
+      const baseT = ((nowSec - sched.start) / sched.duration) % 1;
+    
+      const sx = link.source.x, sy = link.source.y;
+      const tx = link.target.x, ty = link.target.y;
+      const angle = Math.atan2(ty - sy, tx - sx);
+    
+      const rectWidth  = 20;
+      const rectHeight = 2;
+    
+      // ----- gradient (reuse for every rectangle) -----
+      const grad = ctx.createLinearGradient(-rectWidth / 2, 0, rectWidth / 2, 0);
+      grad.addColorStop(0,   'rgba(255,147,30,0)');
+      grad.addColorStop(0.2, 'rgba(255,147,30,1)');
+      grad.addColorStop(0.8, 'rgba(255,147,30,1)');
+      grad.addColorStop(1,   'rgba(255,147,30,0)');
+      ctx.fillStyle = grad;
+    
+      // draw N rectangles, offset evenly around the loop
+      for (let i = 0; i < PULSES_PER_LINK; i++) {
+        const t = (baseT + i / PULSES_PER_LINK) % 1;
+        const x = sx + (tx - sx) * t;
+        const y = sy + (ty - sy) * t;
+    
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.fillRect(-rectWidth / 2, -rectHeight / 2, rectWidth, rectHeight);
+        ctx.restore();
+      }
+    }      
+      
   
     /** Called when mouse hovers a node (or leaves it). */
     function handleNodeHover(node: any, previousNode: any) {
