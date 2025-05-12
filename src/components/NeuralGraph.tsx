@@ -5,6 +5,7 @@ import React, {
     useState,
     useEffect,
     useMemo,
+    useLayoutEffect,
     type MouseEvent
   } from 'react'
   import ForceGraph2D, { type ForceGraphMethods } from 'react-force-graph-2d'
@@ -85,9 +86,7 @@ import React, {
   
     // Center the graph on initial render
     useEffect(() => {
-      // Center the graph at these coordinates
-      fgRef.current.centerAt(585, 310, 0);
-      // Set a larger zoom level (0.7 is zoomed out, >1 is zoomed in)
+      fgRef.current.centerAt(370, 200, 0); // was 280
       fgRef.current.zoom(1.8, 0);
     }, []);
   
@@ -310,8 +309,32 @@ import React, {
       }))
     }), [])
   
+    /* ResizeObserver → always match parent's exact pixels            */
+    const [size, setSize] = useState({ w: 600, h: 600 })
+    useLayoutEffect(() => {
+      if (!containerRef.current) return
+      
+      // Set initial size immediately
+      setSize({
+        w: containerRef.current.clientWidth || 600,
+        h: containerRef.current.clientHeight || 600
+      })
+      
+      const ro = new ResizeObserver(([entry]) => {
+        const width = entry.contentRect.width || 600
+        const height = entry.contentRect.height || 600
+        setSize({ w: width, h: height })
+      })
+      
+      ro.observe(containerRef.current)
+      return () => ro.disconnect()
+    }, [])
+  
     return (
-      <div ref={containerRef} style={{ position: 'relative', width: '100%', height: '600px' }}>
+      <div
+        ref={containerRef}
+        className="w-full h-full"
+      >
         {/* The ForceGraph2D Canvas */}
         <ForceGraph2D
           ref={fgRef}
@@ -335,8 +358,8 @@ import React, {
           // Handle hovers
           onNodeHover={handleNodeHover}
           // Let the canvas fill the container
-          width={undefined}
-          height={undefined}
+          width={size.w}
+          height={size.h}
         />
   
         {/* Tooltip */}
