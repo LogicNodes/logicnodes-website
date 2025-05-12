@@ -11,9 +11,9 @@ import React, {
   import { NODES, LINKS, ICONS, GRAPH_COLORS, SIZE } from '../config/graph'
   
   // --- constants -------------------------------------------------------------
-  const SPEED = 120;               // px / second that a pulse travels
-  const JITTER = 0.4;             // max extra seconds of random delay
-  const PULSES_PER_LINK = 3;       // how many rectangles you want per link
+  const SPEED = 150;               // px / second that a pulse travels
+  const JITTER = 0.2;             // max extra seconds of random delay
+  const PULSES_PER_LINK = 2;       // how many rectangles you want per link
 
   // Fast lookup: id → {x,y}
   const NODE_POS = new Map<string, { x: number; y: number }>(
@@ -25,6 +25,7 @@ import React, {
     node: typeof NODES[number]
     x: number
     y: number
+    tx: string
   } | null
   
   /**
@@ -71,6 +72,7 @@ import React, {
   
   export default function LogicNodesGraph() {
     const fgRef = useRef<ForceGraphMethods>(null!)
+    const containerRef = useRef<HTMLDivElement>(null!)
   
     // We store which node (if any) is currently hovered, plus the mouse coords
     const [hoverData, setHoverData] = useState<HoverData>(null)
@@ -181,34 +183,40 @@ import React, {
       const isHovered = hoveredNodeId === id
   
       // Determine circle radius
-      const radius = isHovered ? SIZE.rHover : SIZE.r
+      const radius = isHovered ? SIZE.rHover : SIZE.r;
   
-      // Draw a circle
-      ctx.beginPath()
-      ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI, false)
-      ctx.fillStyle = GRAPH_COLORS.node
-      ctx.fill()
+      // 1) background circle
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
+      ctx.fillStyle = GRAPH_COLORS.node;
+      ctx.fill();
   
-      // If hovered, draw a stroke ring in accent color
+      // optional accent ring on hover
       if (isHovered) {
-        ctx.lineWidth = SIZE.stroke
-        ctx.strokeStyle = GRAPH_COLORS.accent
-        ctx.stroke()
+        ctx.lineWidth = SIZE.stroke;
+        ctx.strokeStyle = GRAPH_COLORS.accent;
+        ctx.stroke();
       }
   
-      // If there's an icon, draw it centered using the cached image
+      // 2) icon – keep its aspect ratio
       if (icon) {
-        const img = imagesCache[icon as keyof typeof ICONS]
-        // Only draw if fully loaded
-        if (img?.complete) {
-          const iconSize = radius * 1.2 // scale up/down as desired
-          ctx.drawImage(
-            img,
-            node.x - iconSize / 2,
-            node.y - iconSize / 2,
-            iconSize,
-            iconSize
-          )
+        const img = imagesCache[icon as keyof typeof ICONS];
+        if (img?.complete && img.naturalWidth && img.naturalHeight) {
+          const maxSide = radius * 1.3;               // how "big" it may appear
+          const ratio   = img.naturalWidth / img.naturalHeight;
+  
+          // fit longest side to maxSide
+          const w = ratio >= 1 ? maxSide : maxSide * ratio;
+          const h = ratio >= 1 ? maxSide / ratio : maxSide;
+  
+          // clip so only the circular area shows
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
+          ctx.clip();
+  
+          ctx.drawImage(img, node.x - w / 2, node.y - h / 2, w, h);
+          ctx.restore();
         }
       }
     }
@@ -259,18 +267,26 @@ import React, {
       
   
     /** Called when mouse hovers a node (or leaves it). */
-    function handleNodeHover(node: any, previousNode: any) {
-      if (node?.info) {
-        // Use node position as fallback since we can't reliably get mouse coords
-        setHoverData({
-          node,
-          x: node.x + 50, // offset from node position
-          y: node.y - 50
-        })
-      } else {
-        // If no node or no info, clear hover
-        setHoverData(null)
-      }
+    function handleNodeHover(node: any) {
+      if (!node?.info) return setHoverData(null);
+    
+      // 1. graph → screen coordinates
+      const { x: sx, y: sy } = fgRef.current!.graph2ScreenCoords(node.x, node.y);
+    
+      // 2. Decide how to anchor the tooltip so it never overflows
+      const container = containerRef.current!;
+      const PAD = 16;                         // px from edges
+      const BOX_W = 260;                      // tooltip max-width
+      let tx = '-50%';                        // default: center
+      if (sx < PAD + BOX_W / 2)   tx = '0';   // too close to left → align left
+      if (sx > container.offsetWidth - PAD - BOX_W / 2) tx = '-100%'; // right edge
+    
+      setHoverData({
+        node,
+        x: sx,
+        y: sy - 40,   // raise above the node
+        tx            // store chosen translate-X
+      });
     }
   
     // Match the node's circle in the pointer area paint
@@ -295,7 +311,7 @@ import React, {
     }), [])
   
     return (
-      <div style={{ position: 'relative', width: '100%', height: '600px' }}>
+      <div ref={containerRef} style={{ position: 'relative', width: '100%', height: '600px' }}>
         {/* The ForceGraph2D Canvas */}
         <ForceGraph2D
           ref={fgRef}
@@ -326,27 +342,21 @@ import React, {
         {/* Tooltip */}
         {hoverData && hoverData.node.info && (
           <div
+            className="absolute pointer-events-none bg-white border border-gray-200 rounded-md
+                       shadow-md px-4 py-2 max-w-xs w-max
+                       text-ln-dark font-sans"
             style={{
-              position: 'absolute',
-              pointerEvents: 'none',
-              background: 'white',
-              border: '1px solid #ccc',
-              borderRadius: 4,
-              padding: '0.5rem 1rem',
-              fontSize: 14,
-              color: '#333',
-              maxWidth: 220,
-              transform: 'translate(-50%, -110%)',
               left: hoverData.x,
-              top: hoverData.y
+              top:  hoverData.y,
+              transform: `translate(${hoverData.tx}, -110%)`
             }}
           >
-            <div style={{ fontWeight: 'bold', marginBottom: 4 }}>
+            <h3 className="text-heading-md mb-1">
               {hoverData.node.info.title}
-            </div>
-            <div style={{ lineHeight: 1.4 }}>
+            </h3>
+            <p className="text-sm leading-snug">
               {hoverData.node.info.text}
-            </div>
+            </p>
           </div>
         )}
       </div>

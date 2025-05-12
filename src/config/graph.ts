@@ -1,11 +1,21 @@
 // src/config/graph.ts
 
-import logicnodesIcon from '/logo.svg?url'
+import logicnodesIcon from '/icons/logo.svg?url'
 import emailIcon      from '/icons/email.svg?url'
 import folderIcon     from '/icons/folder.svg?url'
 import gearIcon       from '/icons/gear.svg?url'
 import searchIcon     from '/icons/search.svg?url'
 import graduationIcon from '/icons/graduation.svg?url'
+import personIcon     from '/icons/person.svg?url'
+import sendIcon       from '/icons/send.svg?url'
+import earIcon        from '/icons/ear.svg?url'
+import workflowIcon   from '/icons/workflow.svg?url'
+import actionIcon     from '/icons/action.svg?url'
+import imageIcon      from '/icons/image.svg?url'
+import decisionsIcon  from '/icons/decisions.svg?url'
+import notifyIcon     from '/icons/notify.svg?url'
+import syncIcon       from '/icons/sync.svg?url'
+import reportIcon     from '/icons/report.svg?url'
 
 export type GraphNode = {
     id: string
@@ -42,38 +52,54 @@ export type GraphNode = {
     logicnodes: logicnodesIcon,
     email: emailIcon,
     folder: folderIcon,
-    gear: gearIcon,
+    gear: gearIcon, // automation
     search: searchIcon,
     graduation: graduationIcon,
+    person: personIcon,
+    ear: earIcon, // listening
+    send: sendIcon,
+    workflow: workflowIcon,
+    action: actionIcon,
+    image: imageIcon,
+    decisions: decisionsIcon,
+    notify: notifyIcon,
+    sync: syncIcon,
+    report: reportIcon,
   }
   
   export const NODES: GraphNode[] = [
-    { id: 'root', x: 80,  y: 200, icon: 'logicnodes',
-      info: { title: 'LogicNodes', text: 'AI-hub & system connector' } },
-    { id: 'a',    x: 180, y: 100 },
-    { id: 'b',    x: 180, y: 200, icon: 'email',
-      info: { title: 'Email', text: 'Let AI read and act on your inbox.' } },
-    { id: 'c',    x: 180, y: 300 },
-    { id: 'd1',   x: 280, y:  70 },
-    { id: 'd2',   x: 280, y: 160 },
-    { id: 'd3',   x: 280, y: 240 },
-    { id: 'd4',   x: 280, y: 330 },
-    { id: 'e1',   x: 380, y:  70 },
-    { id: 'e2',   x: 380, y: 160, icon: 'gear',
-      info: { title: 'Automation', text: 'Connect workflows to act automatically.' } },
-    { id: 'e3',   x: 380, y: 240 },
-    { id: 'e4',   x: 380, y: 330 },
-    { id: 'f1',   x: 480, y:  70 },
-    { id: 'f2',   x: 480, y: 160 },
-    { id: 'f3',   x: 480, y: 240, icon: 'search',
-      info: { title: 'Enrichment', text: 'Search and fetch external data sources.' } },
-    { id: 'f4',   x: 480, y: 330 },
-    { id: 'g1',   x: 580, y:  70 },
-    { id: 'g2',   x: 580, y: 160 },
-    { id: 'g3',   x: 580, y: 240 },
-    { id: 'g4',   x: 580, y: 330, icon: 'graduation',
-      info: { title: 'Knowledge', text: 'Let AI learn from documents and structure.' } },
-  ]
+    // ─── Layer 0: Entry Point ───
+    { id: 'root', x: 80, y: 200, icon: 'logicnodes', info: { title: 'LogicNodes', text: 'LogicNodes can help you orchestrate your AI workflows' } },
+  
+    // ─── Layer 1: Inputs ───
+    { id: 'a', x: 180, y: 100, icon: 'email', info: { title: 'Email', text: 'Let AI take actions on incoming emails' } },
+    { id: 'b', x: 180, y: 200, icon: 'ear', info: { title: 'Listening', text: 'Transcribe meetings and act on them' } },
+    { id: 'c', x: 180, y: 300, icon: 'graduation', info: { title: 'Knowledge', text: 'AI experts on legislation and policy' } },
+  
+    // ─── Layer 2: Processing ───
+    { id: 'd1', x: 280, y: 70, icon: 'image', info: { title: 'Images', text: 'Extract data from images' } },
+    { id: 'd2', x: 280, y: 160, icon: 'folder', info: { title: 'Documents', text: 'Read and reason over documents' } },
+    { id: 'd3', x: 280, y: 240, icon: 'gear', info: { title: 'Automation', text: 'Automate repetitive tasks' } },
+    { id: 'd4', x: 280, y: 330, icon: 'workflow', info: { title: 'Workflows', text: 'Connect agents into flows' } },
+  
+    // ─── Layer 3: Reasoning ───
+    { id: 'e1', x: 380, y: 70, icon: 'search', info: { title: 'Classification', text: 'Organize and categorize incoming data' } },
+    { id: 'e2', x: 380, y: 160, icon: 'sync', info: { title: 'Sync', text: 'Sync data back into internal systems' } },
+    { id: 'e3', x: 380, y: 240, icon: 'decisions', info: { title: 'Decisions', text: 'Make structured decisions across inputs' } },
+    { id: 'e4', x: 380, y: 330, icon: 'person', info: { title: 'Oversight', text: 'Human verification of AI actions' } },
+  
+    // ─── Layer 4: Action ───
+    { id: 'f1', x: 480, y: 70, icon: 'send', info: { title: 'Send', text: 'Send emails or messages' } },
+    { id: 'f2', x: 480, y: 160, icon: 'action', info: { title: 'Action', text: 'Trigger external systems' } },
+    { id: 'f3', x: 480, y: 240, icon: 'notify', info: { title: 'Notify', text: 'Timely alerts or digests' } },
+    { id: 'f4', x: 480, y: 330, icon: 'report', info: { title: 'Report', text: 'Generate summaries or final outputs' } },
+  
+    // ─── Layer 5: Output ───
+    { id: 'g1', x: 580, y: 70 },
+    { id: 'g2', x: 580, y: 160 },
+    { id: 'g3', x: 580, y: 240 },
+    { id: 'g4', x: 580, y: 330 },
+  ]  
   
   export const LINKS: GraphLink[] = [
     { from: 'root', to: 'a' },
