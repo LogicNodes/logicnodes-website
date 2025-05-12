@@ -1,6 +1,6 @@
 ---
 import { Zap, BanknoteArrowDown, ChartPie } from '../icons';
-import NeuralGraph from './NeuralGraph.astro';
+import NeuralGraph from './NeuralGraph.tsx';
 ---
 <section class="bg-ln-light py-section px-gutter">
   <!-- Hero Row -->
@@ -31,7 +31,7 @@ import NeuralGraph from './NeuralGraph.astro';
 
   <!-- Right: Node Network Graphic -->
   <div class="flex-1 w-full max-w-[600px]">
-    <NeuralGraph />
+    <NeuralGraph client:only="react" />
   </div>
   </div>
 
