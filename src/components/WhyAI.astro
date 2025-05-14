@@ -1,0 +1,52 @@
+---
+/*  WhyAI – “En teknologisk revolution”-sektionen
+    ─────────────────────────────────────────────
+    • Ren .astro-fil – matcher Hero.astro-opbygningen
+    • Ingen props nødvendige (hard-coder indholdet her, som dine andre sektioner)
+    • Responsiv grid:   mobile: billede → tekst   ·   ≥lg: tekst → billede
+    • Kortet overlapper billedet på desktop via lg:-ml-* util
+*/
+
+import { Image } from 'astro:assets'              // valgfrit, hvis du vil optimere billedet
+// Hvis du vil bruge <Image>, importér også selve billedet:
+// import codingHero from '../../public/images/why-ai-coding.jpg';
+---
+<section class="bg-ln-light py-section px-gutter overflow-hidden">
+  <div class="max-w-7xl mx-auto grid gap-12 lg:grid-cols-2 lg:items-center">
+    <!-- ── Billede ───── (øverst på mobil, højre på desktop) -->
+    <div class="order-1 lg:order-2">
+      <!-- Brug <img> eller <Image> efter behov -->
+      <img
+        src="/images/whyai.jpg"
+        alt="Udvikler skriver kode på to skærme"
+        class="w-full h-full object-cover rounded-2xl shadow-lg"
+        loading="lazy"
+      />
+      <!-- Eksempel med <Image>:
+      <Image src={codingHero} alt="Udvikler..." class="w-full h-full object-cover rounded-2xl shadow-lg" /> -->
+    </div>
+
+    <!-- ── Tekstkort  ───── -->
+    <div class="order-2 lg:order-1">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 lg:-ml-24">
+        <span class="uppercase tracking-wider text-sm font-semibold text-ln-accent">
+          HVORFOR AI?
+        </span>
+
+        <h2 class="mt-2 text-heading-xl font-extrabold leading-tight text-ln-dark">
+          En teknologisk&nbsp;revolution
+        </h2>
+
+        <p class="mt-4 text-body text-ln-dark space-y-4">
+          Mange virksomheder ved, at AI rummer et stort potentiale – men få har et klart billede af, helt konkret hvordan.
+          <br /><br />
+          Computeren virkede også abstrakt i starten. I dag er den uundværlig i enhver virksomhed.
+          <br /><br />
+          AI er den næste revolution – og første skridt er indsigt.
+          <br /><br />
+          Book en gratis samtale med en AI-ekspert fra LogicNodes. På under en time får I overblik over mulighederne og er klar til at tage det første skridt.
+         </p>
+      </div>
+    </div>
+  </div>
+</section>

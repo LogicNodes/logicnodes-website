@@ -13,36 +13,36 @@ import React, {
   
   const CARDS = [
     {
-      title: 'Information',
+      title: 'Indsigt',
       body:
-        'Bliv introduceret til enkle, men effektive AI-værktøjer, der hurtigt kan styrke produktiviteten i enhver virksomhed.',
+        'Få en klar forståelse af, hvad AI er, og hvordan konkrete værktøjer allerede i dag kan forbedre effektiviteten i jeres virksomhed.',
       icon: '/icons/info.svg',
     },
     {
-      title: 'Indsigt',
+      title: 'Identifikation',
       body:
-        'Få indsigt i, hvor AI kan gøre den største forskel i jeres virksomhed – baseret på en grundig kortlægning af jeres arbejds­gange.',
+        'Opnå overblik over de områder i jeres forretning, hvor AI har størst potentiale til at skabe værdi og forbedre arbejdsgange.',
       icon: '/icons/insight.svg',
     },
     {
       title: 'Implementering',
       body:
-        'Få hjælp til at integrere AI i jeres arbejds­gange gennem et struktureret forløb med udgangspunkt i jeres hverdag.',
+        'Få hjælp til at implementere AI i jeres arbejds­gange gennem et struktureret forløb med udgangspunkt i jeres hverdag.',
       icon: '/icons/implement.svg',
     },
     {
-      title: 'Specialløsninger',
+      title: 'Innovation',
       body:
-        'Vi designer og implementerer unikke AI-løsninger, der passer præcist til jeres virksomhed og jeres udfordringer.',
+        'Differentiér jer med innovative AI-løsninger, der er specialdesignet til jeres virksomhed og jeres udfordringer.',
       icon: '/icons/custom.svg',
     },
   ];
   
   // zig-zag X positions (inside a 120-px wide SVG)
-  const X = [10, 110, 10, 110];
+  const X = [0, 120, 0, 120];
   
   // node sizes
-  const R = { base: 40, hot: 45 };
+  const R = { base: 50, hot: 60 };
   const ICON_SCALE = 1.3; // icon ≈ 120 % of radius
   
   export default function ServicesSection() {
