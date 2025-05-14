@@ -1,19 +1,21 @@
 ---
 // src/components/ContactSection.astro
-// --------------------------------------------------------------
+//
 // "Kontakt" section
 // – bg: ln.light
 // – left column: dark card with contact details
-// – right column: white card with form
-// --------------------------------------------------------------
+// – right column: white card with form   →  sends via EmailJS
+// -----------------------------------------------------------------
 ---
+
 <section id="kontakt" class="bg-ln-light py-section px-gutter">
     <div
       class="max-w-7xl mx-auto grid gap-12
              lg:grid-cols-[minmax(0,45%)_minmax(320px,55%)] lg:items-start">
   
       <!-- ── Left: info card ───────────────────────────────────────── -->
-      <div class="bg-ln-dark text-white rounded-2xl p-8 md:p-10 shadow-xl space-y-6">
+      <div
+        class="bg-ln-dark text-white rounded-2xl p-8 md:p-10 shadow-xl space-y-6">
         <h2 class="text-heading-lg leading-tight font-extrabold">
           Kom i kontakt med en<br />
           <span class="text-ln-accent">AI-ekspert</span>
@@ -26,32 +28,29 @@
         <ul class="space-y-3 text-body">
           <li class="flex items-center gap-3">
             <img src="/icons/email.svg" class="w-5 h-5" alt="" />
-            <a href="mailto:email@gnail.com" class="hover:text-ln-accent">
-              email@gnail.com
+            <a href="mailto:kontakt@logicnodes.ai"
+               class="hover:text-ln-accent">
+              kontakt@logicnodes.ai
             </a>
           </li>
           <li class="flex items-center gap-3">
             <img src="/icons/phone.svg" class="w-5 h-5" alt="" />
-            +45&nbsp;12&nbsp;34&nbsp;56&nbsp;78
+            +45&nbsp;40&nbsp;90&nbsp;62&nbsp;13
           </li>
           <li class="flex items-center gap-3">
             <img src="/icons/location.svg" class="w-5 h-5" alt="" />
-            Amaliegade&nbsp;45, 1.&nbsp;sal, København
+            Slet&nbsp;Møllevej&nbsp;20, 8310&nbsp;Tranbjerg, Aarhus
           </li>
         </ul>
       </div>
   
       <!-- ── Right: form ───────────────────────────────────────────── -->
       <form
+        id="kontaktForm"
         class="bg-white rounded-2xl shadow-xl p-8 md:p-10 w-full space-y-6"
-        name="kontakt"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
       >
-        <input type="hidden" name="form-name" value="kontakt" />
-        <p class="hidden">
-          <label>Don't fill this out: <input name="bot-field" /></label>
-        </p>
+        <!-- invisible honeypot -->
+        <input type="text" name="bot-field" class="hidden" />
   
         <!-- fields -->
         <div class="grid gap-4">
@@ -60,32 +59,38 @@
             type="text"
             name="name"
             placeholder="Dit navn"
-            class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 placeholder:text-ln-dark/70"
+            class="border-b border-gray-300 focus:outline-none
+                   focus:border-ln-accent py-3 placeholder:text-ln-dark/70"
           />
           <input
             required
             type="email"
             name="email"
             placeholder="Din e-mail"
-            class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 placeholder:text-ln-dark/70"
+            class="border-b border-gray-300 focus:outline-none
+                   focus:border-ln-accent py-3 placeholder:text-ln-dark/70"
           />
           <input
             type="tel"
             name="phone"
             placeholder="Dit tlf. nr."
-            class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 placeholder:text-ln-dark/70"
+            class="border-b border-gray-300 focus:outline-none
+                   focus:border-ln-accent py-3 placeholder:text-ln-dark/70"
           />
           <input
             type="text"
             name="company"
             placeholder="Din virksomhed"
-            class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 placeholder:text-ln-dark/70"
+            class="border-b border-gray-300 focus:outline-none
+                   focus:border-ln-accent py-3 placeholder:text-ln-dark/70"
           />
           <textarea
             name="message"
             rows="3"
             placeholder="Besked"
-            class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 placeholder:text-ln-dark/70 resize-none"
+            class="border-b border-gray-300 focus:outline-none
+                   focus:border-ln-accent py-3 placeholder:text-ln-dark/70
+                   resize-none"
           />
         </div>
   
@@ -96,7 +101,43 @@
         >
           Send
         </button>
+  
+        <!-- status message -->
+        <p id="formStatus"
+           class="text-sm mt-3 text-ln-accent min-h-[1.25rem]"></p>
       </form>
     </div>
   </section>
+
+  <script is:inline>
+    // The global `emailjs` is defined once the UMD file above has loaded.
+    window.addEventListener('DOMContentLoaded', () => {
+      emailjs.init('dDIZKjyEIK4FmwovM');      // PUBLIC key
+  
+      const SERVICE  = 'service_79qlwra';         // must start with "service_"
+      const TEMPLATE = 'template_0c7sawl';        // must start with "template_"
+  
+      const form   = document.getElementById('kontaktForm');
+      const status = document.getElementById('formStatus');
+  
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();                       // stop page reload
+        if (form['bot-field'].value) return;      // honeypot
+  
+        status.textContent = 'Sender …';
+  
+        try {
+          await emailjs.sendForm(SERVICE, TEMPLATE, form);
+          status.textContent = 'Tak! Vi vender tilbage hurtigst muligt.';
+          form.reset();
+        } catch (err) {
+          console.error('EmailJS error:', err);
+          status.textContent =
+            'Noget gik galt – prøv igen eller send os en mail direkte.';
+        }
+      });
+    });
+  </script>
+  
+  </script>
   
