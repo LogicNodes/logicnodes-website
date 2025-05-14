@@ -2,6 +2,7 @@
 // src/layouts/BaseLayout.astro
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 ---
 <head>
   <meta charset="UTF-8" />
@@ -10,15 +11,8 @@ import Navbar from '../components/Navbar.astro';
 </head>
 <body class="bg-ln-light text-ln-dark">
   <Navbar />
-
-  <header>
-    <slot name="header" />
-  </header>
   <main>
     <slot />
   </main>
-  <footer>
-    <slot name="footer" />
-  </footer>
+  <Footer />
 </body>
-<script src="/graph-interaction.js" defer></script>
