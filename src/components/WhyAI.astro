@@ -1,55 +1,51 @@
 ---
-/* WhyAI – "En teknologisk revolution" */
+// WhyAI – "En teknologisk revolution"
 import WhyAIGraphic from './WhyAIGraphic.astro';
 ---
 
-<section class="relative bg-ln-light py-section px-gutter overflow-visible">
-  <div class="relative mx-auto max-w-7xl">
+<section class="bg-ln-light py-section px-gutter">
+  <div class="mx-auto max-w-7xl relative">
+    <div class="flex flex-col lg:flex-row items-start">
+      <!-- ── TEXT CARD ──────────────────────────────────────────────── -->
+      <div class="relative z-10 lg:w-3/5 mb-16 lg:mb-0 mt-32 lg:mt-48">
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10">
+          <span class="uppercase tracking-wider text-sm font-semibold text-ln-accent">
+            HVORFOR AI?
+          </span>
 
-    <!-- ── TEXT CARD ── -->
-    <div
-      class={`relative z -0 w-full
-              lg:max-w-4xl                    /* give the copy more room */
-              lg:absolute lg:left-0
-              lg:top-1/2 lg:translate-y-[40%]   /* goes 10% *down* from center */
-              `}
-    >
-      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10">
-        <span class="uppercase tracking-wider text-sm font-semibold text-ln-accent">
-          HVORFOR AI?
-        </span>
+          <h2 class="mt-2 text-heading-xl font-extrabold leading-tight text-ln-dark">
+            En teknologisk&nbsp;revolution
+          </h2>
 
-        <h2 class="mt-2 text-heading-xl font-extrabold leading-tight text-ln-dark">
-          En teknologisk&nbsp;revolution
-        </h2>
+          <p class="mt-4 space-y-4 text-body text-ln-dark">
+            Mange virksomheder ved, at AI rummer et stort potentiale – men
+            få har et klart billede af, helt konkret hvordan.<br /><br />
+            Computeren virkede også abstrakt i starten. I dag er den
+            uundværlig i enhver virksomhed.<br /><br />
+            AI er den næste revolution – og første skridt er indsigt.<br /><br />
+            Book en gratis samtale med en AI-ekspert fra LogicNodes. På
+            under en time får I overblik over mulighederne og er klar til at
+            tage det første skridt.
+          </p>
+          
+          <a
+            href="#kontakt"
+            class="mt-6 inline-block bg-ln-accent text-white font-semibold py-3 px-6 rounded-2xl text-center hover:bg-orange-500 transition"
+          >
+            Kontakt os
+          </a>
+        </div>
+      </div>
 
-        <p class="mt-4 space-y-4 text-body text-ln-dark">
-          Mange virksomheder ved, at AI rummer et stort potentiale – men
-          få har et klart billede af, helt konkret hvordan.<br /><br />
-          Computeren virkede også abstrakt i starten. I dag er den
-          uundværlig i enhver virksomhed.<br /><br />
-          AI er den næste revolution – og første skridt er indsigt.<br /><br />
-          Book en gratis samtale med en AI-ekspert fra LogicNodes. På
-          under en time får I overblik over mulighederne og er klar til at
-          tage det første skridt.
-        </p>
-        
-        <a
-          href="#kontakt"
-          class="mt-6 inline-block bg-ln-accent text-white font-semibold py-3 px-6 rounded-2xl text-center hover:bg-orange-500 transition"
-        >
-          Kontakt os
-        </a>
+      <!-- ── GRAPHIC ─────────────────────────────────────────────────── -->
+      <div class="w-full lg:w-1/2 lg:absolute lg:right-0 lg:top-16">
+        <WhyAIGraphic
+          class="pointer-events-none w-full h-auto scale-110 lg:scale-125 max-w-full"
+          aria-hidden="true"
+        />
       </div>
     </div>
-
-    <!-- ── GRAPHIC ── -->
-    <WhyAIGraphic
-      class={`pointer-events-none
-             lg:absolute lg:inset-y-0 lg:right-10
-             lg:w-[50%]
-             lg:max-w-none
-             lg:translate-x-1/3`}
-    />
+    <!-- Spacer div with responsive height that adjusts to content -->
+    <div class="h-[100px] md:h-[150px] lg:h-[300px]"></div>
   </div>
 </section>

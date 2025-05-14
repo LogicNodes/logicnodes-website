@@ -1,0 +1,90 @@
+---
+// src/components/StepsSection.astro
+// ------------------------------------------------------------------
+// "AI‑implementering i 4 trin" section
+// • Dark background (ln.dark)
+// • Copy & CTA buttons in the left column
+// • 4 staggered step‑cards in the right column
+// ------------------------------------------------------------------
+
+const steps = [
+  {
+    num: 1,
+    title: 'Opstartsmøde',
+    body:
+      `Vi holder et opstartsmøde, hvor I vil blive introduceret til nogle værktøjer, der kan bruges i de fleste virksomheder. Her får I også konkrete forslag til, hvordan I kan begynde at tage dem i brug med det samme. Samtidig tager vi en generel dialog om, hvordan jeres selskab fungerer, så vi i fællesskab kan identificere, hvor AI vil give den største gevinst for jer`,
+  },
+  {
+    num: 2,
+    title: 'Repræsentantmøder',
+    body:
+      `Når de vigtigste områder er fundet, holder vi individuelle møder med en repræsentant fra hvert område. Vores AI‑eksperter lærer jeres arbejds­gange at kende og giver konkrete forslag – både til hurtige forbedringer og til ændringer, der kan gavne på længere sigt.`,
+  },
+  {
+    num: 3,
+    title: 'Implementering',
+    body:
+      `For at gøre AI til en naturlig del af jeres hverdag, tilbyder vi et forløb med den nødvendige viden og støtte. Forløbet vil tage udgangspunkt i jeres daglige arbejds­gange, og sikre at I får yderligere hjælp til udfordringer som de opstår.`,
+  },
+  {
+    num: 4,
+    title: 'Specialløsninger',
+    body:
+      `Det er her, hvor AI går fra at være noget, der sparer penge og øger effektivitet, til den slags teknologi der kan være hjørnesten for den næste Netflix. LogicNodes kan hjælpe jer, hvad end det handler om integration af intelligente agenter, sammensætning af et netværk af forskellige AI‑løsninger til at løse jeres unikke problem, eller træning af specialiseret AI helt fra bunden.`,
+  },
+];
+---
+
+<section id="proces" class="bg-ln-dark py-section px-gutter text-white">
+  <div
+    class="max-w-7xl mx-auto grid gap-16
+           lg:grid-cols-[minmax(0,40%)_minmax(320px,60%)] lg:items-center">
+
+    <!-- ── Left column – copy & CTA ───────────────────────────────── -->
+    <div class="space-y-6">
+      <span class="uppercase tracking-wider text-sm font-semibold text-ln-accent">
+        Kom nemt i gang
+      </span>
+
+      <h2 class="text-heading-xl font-extrabold leading-tight">
+        AI implementering med LogicNodes<br />i 4 trin
+      </h2>
+
+      <div class="flex flex-col gap-4">
+        <!-- Outline first, filled second (matches the mockup) -->
+        <a
+          href="#specialloesninger"
+          class="w-full border-2 border-ln-accent text-ln-accent font-semibold py-3 px-6 rounded-2xl text-center hover:bg-ln-accent hover:text-white transition"
+        >
+          Specialløsninger
+        </a>
+        <a
+          href="#kontakt"
+          class="w-full bg-ln-accent text-white font-semibold py-3 px-6 rounded-2xl text-center hover:bg-orange-500 transition"
+        >
+          Kontakt os
+        </a>
+      </div>
+    </div>
+
+    <!-- ── Right column – the 4 steps ─────────────────────────────── -->
+    <ol class="space-y-10">
+      {steps.map(step => (
+        <li class="relative">
+          <!-- Card -->
+          <div class="relative bg-white p-6 rounded-2xl shadow-xl text-ln-dark">
+            <!-- Number bubble -->
+            <span
+              class="absolute -top-4 -left-4 w-10 h-10 bg-ln-accent text-white font-bold rounded-full flex items-center justify-center text-sm"
+            >
+              {step.num}
+            </span>
+
+            <h3 class="font-bold text-heading-md mb-2">{step.title}</h3>
+            <p class="text-body leading-relaxed">{step.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
