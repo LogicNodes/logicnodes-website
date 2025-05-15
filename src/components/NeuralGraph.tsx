@@ -1,4 +1,4 @@
-// src/components/LogicNodesGraph.tsx
+// src/components/NeuralGraph.tsx
 
 import React, {
     useRef,
