@@ -1,0 +1,20 @@
+---
+// src/pages/specialloesninger.astro
+import BaseLayout from '../layout/BaseLayout.astro';
+import SpecialHero from '@features/specials/SpecialHero.astro';
+import SolutionSection from '@features/specials/SolutionSection.astro';
+import { SOLUTIONS } from '@features/specials/solutions.data';
+import TrustSection from '@features/trust/TrustSection.astro';
+import ContactSection from '@features/contact/ContactSection.astro';
+---
+
+<BaseLayout title="Specialløsninger – LogicNodes">
+  <SpecialHero />
+
+  {SOLUTIONS.map((s, i) => (
+    <SolutionSection solution={s} index={i} />
+  ))}
+
+  <TrustSection />
+  <ContactSection />
+</BaseLayout> 

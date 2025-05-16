@@ -1,0 +1,115 @@
+---
+/* src/features/specials-carousel/SpecialsCarousel.astro
+   Pure drop-in component – no testimonials, no logos.                */
+
+import Card  from '@components/Card.astro';
+import Icon  from '@lib/Icon.astro';
+import { SPECIALS } from './specials.data';
+---
+
+<section id="specialloesninger" class="bg-ln-light py-section px-gutter">
+  <div class="relative max-w-7xl mx-auto py-4 px-4">
+    <!-- prev button -->
+    <button id="specialsPrev"
+            class="absolute -left-6 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center h-12 w-12 text-ln-dark hover:scale-105 transition"
+            aria-label="Forrige">
+      <Icon name="arrow-left" class="w-16 h-16" />
+    </button>
+
+    <!-- next button -->
+    <button id="specialsNext"
+            class="absolute -right-6 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center h-12 w-12 text-ln-dark hover:scale-105 transition"
+            aria-label="Næste">
+      <Icon name="arrow-right" class="w-16 h-16" />
+    </button>
+
+    <!-- carousel masking container with clip path -->
+    <div class="overflow-hidden rounded-xl">
+      <!-- carousel container with padding for visible items' shadows -->
+      <div id="specialsCarousel" class="overflow-visible pt-8 pb-12 px-4 mx-auto">
+        <!-- carousel track with negative margins to hide edges -->
+        <div id="specialsTrack" class="flex transition-transform duration-300 mx-[-2%]">
+          {/* Triple repeat to ensure enough cards for wrapping, regardless of SPECIALS length */}
+          {[...SPECIALS, ...SPECIALS, ...SPECIALS].map((s, i) => (
+            <a href={s.link} class="w-full sm:w-1/3 flex-shrink-0 px-4 sm:px-6 group">
+              <Card tight
+                    class="bg-ln-dark text-white text-center space-y-3 flex flex-col min-h-[550px] h-full shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:translate-y-[-4px] group-hover:scale-[1.01]">
+                <div class="flex-1 flex flex-col items-center justify-center py-12">
+                  <img src={s.icon} alt=""
+                       class="mx-auto w-16 h-16 mb-8 transition-transform group-hover:scale-110 duration-300" />
+                  <h3 class="font-bold text-heading-md mb-5">{s.title}</h3>
+                  <p class="text-body max-w-xs">{s.body}</p>
+                </div>
+              </Card>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- carousel script -->
+  <script define:vars={{ specialsCount: SPECIALS.length }}>
+    (() => {
+      const track = document.getElementById('specialsTrack');
+      const prev  = document.getElementById('specialsPrev');
+      const next  = document.getElementById('specialsNext');
+      if (!track) return;
+    
+      const CARD_COUNT = specialsCount;   // unique slides
+      const DURATION   = 300;             // ms
+    
+      // ── responsive settings ──
+      const getSettings = () =>
+        window.matchMedia('(max-width: 639px)').matches
+          ? { cardWidth: 100 }            // 1 per view
+          : { cardWidth: 100 / 3 };       // 3 per view
+    
+      let { cardWidth } = getSettings();
+      let currentIndex  = CARD_COUNT;     // start on the middle copy
+    
+      /* ---------------------------------------------------------------
+         Helpers
+         --------------------------------------------------------------- */
+    
+      const goTo = (idx, animate = true) => {
+        track.style.transition = animate ? `transform ${DURATION}ms` : 'none';
+        currentIndex = idx;
+        track.style.transform = `translateX(-${idx * cardWidth}%)`;
+    
+        if (!animate) {
+          /* force a reflow so the snap is committed without animation */
+          // (reading any layout-dependent prop works)
+          track.offsetHeight;
+          // transition stays 'none' until the next animated move
+        }
+      };
+    
+      const wrapIfNeeded = () => {
+        if (currentIndex < CARD_COUNT)          goTo(currentIndex + CARD_COUNT, false);
+        else if (currentIndex >= CARD_COUNT*2)  goTo(currentIndex - CARD_COUNT, false);
+      };
+    
+      /* ---------------------------------------------------------------
+         Event handlers
+         --------------------------------------------------------------- */
+    
+      prev?.addEventListener('click', () => goTo(currentIndex - 1));
+      next?.addEventListener('click', () => goTo(currentIndex + 1));
+    
+      /* run wrap check when the slide animation actually ends */
+      track.addEventListener('transitionend', (e) => {
+        if (e.propertyName === 'transform') wrapIfNeeded();
+      });
+    
+      /* adjust widths on resize */
+      window.addEventListener('resize', () => {
+        ({ cardWidth } = getSettings());
+        goTo(currentIndex, false);        // snap in place with new width
+      });
+    
+      /* initial paint */
+      goTo(currentIndex, false);
+    })();
+    </script>    
+</section>

@@ -1,0 +1,28 @@
+---
+import Card from '@components/Card.astro';
+import type { Card as CardData } from './solutions.data';
+
+export interface Props {
+  cards: CardData[];
+}
+
+const { cards } = Astro.props;
+---
+
+<ol class="space-y-10">
+  {cards.map(c => (
+    <li class="relative">
+      <Card tight class="relative text-ln-dark">
+        <!-- orange number bubble -->
+        <span
+          class="absolute -top-4 -left-4 w-10 h-10 bg-ln-accent text-white
+                 font-bold rounded-full flex items-center justify-center text-sm">
+          {c.num}
+        </span>
+
+        <h3 class="font-bold text-heading-md mb-2">{c.title}</h3>
+        <p class="text-body leading-relaxed">{c.body}</p>
+      </Card>
+    </li>
+  ))}
+</ol>

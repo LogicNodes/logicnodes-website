@@ -1,0 +1,55 @@
+---
+// src/features/specials/SolutionSection.astro
+import Button from '@components/Button.astro';
+import NumberedCards from './NumberedCards.astro';
+import type { Solution } from './solutions.data';
+
+export interface Props {
+  solution: Solution;
+  /** the 0-based index decides left/right alternation */
+  index: number;
+}
+
+const { solution, index } = Astro.props;
+const reversed = index % 2 === 1; // every second block is flipped
+---
+
+<section id={solution.id} class="py-section px-gutter bg-ln-light">
+  <div
+    class={
+      `max-w-7xl mx-auto grid gap-16
+       lg:grid-cols-[minmax(0,45%)_minmax(320px,55%)] lg:items-center ` +
+      (reversed ? 'lg:[&>*:first-child]:order-2' : '')
+    }>
+
+    <!-- ─────── Text + Media column ──────────────────────────── -->
+    <div class="space-y-6">
+      <h2 class="text-heading-lg font-extrabold leading-tight text-ln-dark">
+        {solution.title}
+      </h2>
+      <p class="text-body text-ln-dark">{solution.body}</p>
+
+      {solution.media.type === 'image' && (
+        <img
+          src={solution.media.src}
+          alt={solution.media.alt}
+          class="rounded-2xl shadow-xl w-full h-auto"
+        />
+      )}
+
+      {solution.media.type === 'video' && (
+        <video
+          src={solution.media.src}
+          poster={solution.media.poster}
+          controls
+          class="rounded-2xl shadow-xl w-full h-auto"
+        />
+      )}
+
+      <Button href="#kontakt" variant="primary">Kontakt os</Button>
+    </div>
+
+    <!-- ─────── Numbered cards column ─────────────────────────── -->
+    <NumberedCards cards={solution.cards} />
+  </div>
+</section> 
