@@ -1,5 +1,6 @@
 ---
 // src/components/Footer.astro
+import logoNameSvg from '@/assets/logos/logo_name.svg?url';
 ---
 <footer class="bg-ln-dark text-white px-gutter py-14">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-12">
@@ -7,7 +8,7 @@
       <!-- ───── Left column – logo ────────────────────────────────── -->
       <div class="shrink-0 w-60">          <!-- adjust w-60 if you need -->
         <a href="/" class="block">
-          <img src="/logo_name.svg" alt="LogicNodes logo" class="h-28 w-auto" />
+          <img src={logoNameSvg} alt="LogicNodes logo" class="h-28 w-auto" />
         </a>
       </div>
   

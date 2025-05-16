@@ -1,11 +1,12 @@
 ---
 // src/components/Navbar.astro
+import logoSvg from '@/assets/logos/logo.svg?url';
 ---
 <nav class="w-full bg-ln-light shadow-sm">
     <div class="max-w-7xl mx-auto px-gutter py-4 flex items-center justify-between">
       <!-- Left: Logo -->
       <a href="/" class="flex items-center gap-2">
-        <img src="/logo.svg" alt="LogicNodes Logo" class="h-12 w-auto" />
+        <img src={logoSvg} alt="LogicNodes Logo" class="h-12 w-auto" />
       </a>
   
       <!-- Right: Navigation -->
