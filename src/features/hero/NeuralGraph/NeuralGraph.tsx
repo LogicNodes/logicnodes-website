@@ -392,7 +392,7 @@ import React, {
         {/* Tooltip */}
         {hoverData && hoverData.node.info && (
           <div
-            className="absolute pointer-events-none bg-white border border-gray-200 rounded-md
+            className="absolute pointer-events-none bg-white rounded-md
                        shadow-md px-4 py-2 max-w-xs w-max
                        text-ln-dark font-sans"
             style={{

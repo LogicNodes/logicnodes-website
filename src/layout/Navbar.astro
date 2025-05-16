@@ -1,28 +1,74 @@
 ---
-// src/components/Navbar.astro
+// Responsive Navbar with burger menu
 import logoSvg from '@assets/logos/logo.svg?url';
 ---
-<nav class="w-full bg-ln-light shadow-sm">
-    <div class="max-w-7xl mx-auto px-gutter py-4 flex items-center justify-between">
-      <!-- Left: Logo -->
-      <a href="/" class="flex items-center gap-2">
-        <img src={logoSvg} alt="LogicNodes Logo" class="h-12 w-auto" />
-      </a>
-  
-      <!-- Right: Navigation -->
-      <div class="hidden md:flex items-center gap-6">
-        <a href="#specialloesninger" class="text-ln-dark hover:text-ln-accent font-medium">Specialløsninger</a>
-        <a href="#jobside" class="text-ln-dark hover:text-ln-accent font-medium">Jobside</a>
-        <a href="#videnscenter" class="text-ln-dark hover:text-ln-accent font-medium">Videnscenter</a>
-  
-        <!-- CTA Button -->
-        <a
-          href="#kontakt"
-          class="bg-ln-accent text-white font-semibold py-2.5 px-5 rounded-2xl text-sm hover:bg-orange-500 transition"
-        >
-          Kontakt os
-        </a>
-      </div>
+<nav class="w-full bg-ln-light relative">
+  <div class="max-w-7xl mx-auto px-gutter py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2">
+      <img src={logoSvg} alt="LogicNodes Logo" class="h-12 w-auto" />
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#specialloesninger" class="text-ln-dark hover:text-ln-accent font-medium">Specialløsninger</a>
+      <a href="#jobside" class="text-ln-dark hover:text-ln-accent font-medium">Jobside</a>
+      <a href="#videnscenter" class="text-ln-dark hover:text-ln-accent font-medium">Videnscenter</a>
+      <a href="#kontakt" class="bg-ln-accent text-white font-semibold py-2.5 px-5 rounded-2xl text-sm hover:bg-orange-500 transition">Kontakt os</a>
     </div>
-  </nav>
-  
+
+    <!-- Burger button (mobile) -->
+    <button id="burgerBtn" class="md:hidden p-2" aria-label="Åbn menuen">
+      <!-- 3-line hamburger -->
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ln-dark">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobileMenu" class="fixed inset-0 bg-ln-light z-50 flex flex-col items-center justify-center gap-8 text-lg font-medium text-ln-dark transform translate-x-full transition-transform md:hidden">
+    <button id="closeBtn" class="absolute top-6 right-6 p-2" aria-label="Luk menuen">
+      <!-- X icon -->
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <a href="#specialloesninger" class="hover:text-ln-accent" onclick="closeMenu()">Specialløsninger</a>
+    <a href="#jobside" class="hover:text-ln-accent" onclick="closeMenu()">Jobside</a>
+    <a href="#videnscenter" class="hover:text-ln-accent" onclick="closeMenu()">Videnscenter</a>
+    <a href="#kontakt" class="bg-ln-accent text-white font-semibold py-2.5 px-5 rounded-2xl hover:bg-orange-500 transition" onclick="closeMenu()">Kontakt os</a>
+  </div>
+
+  <script is:inline>
+    const burger = document.getElementById('burgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeBtn = document.getElementById('closeBtn');
+
+    function openMenu() {
+      mobileMenu.style.transform = 'translateX(0)';
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.style.transform = 'translateX(100%)';
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    burger?.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+
+    // Close on esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    // Export for inline onclick handlers
+    window.closeMenu = closeMenu;
+  </script>
+</nav>
