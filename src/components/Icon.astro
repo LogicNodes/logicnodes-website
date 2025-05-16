@@ -1,0 +1,12 @@
+---
+// src/components/Icon.astro
+export interface Props {
+  name: string;
+  class?: string;
+}
+
+// Dynamic import based on the `name` prop
+const Svg = await import(`../assets/icons/ui/${Astro.props.name}.svg?component`).then(m => m.default);
+---
+
+<Svg class={Astro.props.class ?? ''}/> 
