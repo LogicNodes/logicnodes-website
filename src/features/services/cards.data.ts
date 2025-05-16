@@ -3,10 +3,11 @@ import infoIcon      from '@assets/icons/graph/info.svg?url';
 import insightIcon   from '@assets/icons/graph/insight.svg?url';
 import implementIcon from '@assets/icons/graph/implement.svg?url';
 import customIcon    from '@assets/icons/graph/custom.svg?url';
+import { COLORS } from '@lib/colors';
 
-export const ACCENT = '#ff931e';   // ln.accent
-export const DARK   = '#3f495d';   // ln.dark (node outline when idle)
-export const LIGHT  = '#f2f9ff';   // ln.light (node fill + default wire)
+export const ACCENT = COLORS.accent;
+export const DARK   = COLORS.dark;
+export const LIGHT  = COLORS.light;
 
 export const CARDS = [
   {

@@ -10,6 +10,7 @@ import React, {
   } from 'react'
   import ForceGraph2D, { type ForceGraphMethods } from 'react-force-graph-2d'
   import { NODES, LINKS, ICONS, GRAPH_COLORS, SIZE } from './graph.data'
+  import { COLORS } from '@lib/colors'
   
   // --- constants -------------------------------------------------------------
   const SPEED = 150;               // px / second that a pulse travels
@@ -186,7 +187,7 @@ import React, {
       const radius = isHovered ? SIZE.rHover : SIZE.r;
       
       // Add a drop shadow
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+      ctx.shadowColor = `rgba(0, 0, 0, 0.2)`;
       ctx.shadowBlur = 10;
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 4;
@@ -256,11 +257,12 @@ import React, {
       const rectHeight = 2;
     
       // ----- gradient (reuse for every rectangle) -----
+      const accentColor = COLORS.accent.replace('#', '');
       const grad = ctx.createLinearGradient(-rectWidth / 2, 0, rectWidth / 2, 0);
-      grad.addColorStop(0,   'rgba(255,147,30,0)');
-      grad.addColorStop(0.2, 'rgba(255,147,30,1)');
-      grad.addColorStop(0.8, 'rgba(255,147,30,1)');
-      grad.addColorStop(1,   'rgba(255,147,30,0)');
+      grad.addColorStop(0,   `rgba(${parseInt(accentColor.substr(0,2), 16)}, ${parseInt(accentColor.substr(2,2), 16)}, ${parseInt(accentColor.substr(4,2), 16)}, 0)`);
+      grad.addColorStop(0.2, `rgba(${parseInt(accentColor.substr(0,2), 16)}, ${parseInt(accentColor.substr(2,2), 16)}, ${parseInt(accentColor.substr(4,2), 16)}, 1)`);
+      grad.addColorStop(0.8, `rgba(${parseInt(accentColor.substr(0,2), 16)}, ${parseInt(accentColor.substr(2,2), 16)}, ${parseInt(accentColor.substr(4,2), 16)}, 1)`);
+      grad.addColorStop(1,   `rgba(${parseInt(accentColor.substr(0,2), 16)}, ${parseInt(accentColor.substr(2,2), 16)}, ${parseInt(accentColor.substr(4,2), 16)}, 0)`);
       ctx.fillStyle = grad;
     
       // draw N rectangles, offset evenly around the loop

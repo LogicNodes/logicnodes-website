@@ -21,6 +21,9 @@ const vbW = maxX - minX;
 const vbH = maxY - minY;
 
 const byId = Object.fromEntries(NN_NODES.map(n => [n.id, n]));
+
+// Shadow properties
+const shadowOpacity = 0.2;
 ---
 
 <svg
@@ -34,7 +37,7 @@ const byId = Object.fromEntries(NN_NODES.map(n => [n.id, n]));
   <!-- identical drop-shadow -->
   <defs>
     <filter id="ds" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="rgba(0,0,0,.20)" />
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color={`rgba(0,0,0,${shadowOpacity})`} />
     </filter>
   </defs>
 

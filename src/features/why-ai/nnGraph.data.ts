@@ -13,6 +13,7 @@ import globeIcon    from '@assets/icons/graph/globe.svg?url'
 import factoryIcon  from '@assets/icons/graph/factory.svg?url'
 import cornIcon     from '@assets/icons/graph/corn.svg?url'
 import scrollIcon   from '@assets/icons/graph/scroll.svg?url'
+import { COLORS } from '@lib/colors'
 
 
 export type GraphNode = {
@@ -33,9 +34,9 @@ export type GraphNode = {
   
   // Colors
   export const GRAPH_COLORS = {
-    node: '#3f495d',     // ln.dark
-    line: '#3f495d',     // ln.dark
-    accent: '#ff931e',   // ln.accent
+    node: COLORS.dark,
+    line: COLORS.dark,
+    accent: COLORS.accent,
   }
   
   export const SIZE = {
