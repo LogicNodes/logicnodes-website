@@ -1,0 +1,38 @@
+---
+// src/features/specials/SpecialHero.astro
+import Button from '@components/Button.astro';
+// Using placeholder image path until actual hero image is available
+const heroImg = '/placeholder-hero.jpg';
+---
+
+<section class="bg-ln-light py-section px-gutter overflow-hidden">
+  <div
+    class="max-w-7xl mx-auto grid gap-16
+           lg:grid-cols-[minmax(0,45%)_minmax(320px,55%)] lg:items-center">
+
+    <!-- Copy -->
+    <div class="space-y-6">
+      <span class="uppercase tracking-wider text-sm font-semibold text-ln-accent">
+        Hvorfor AI / Specialløsninger
+      </span>
+
+      <h1 class="text-[3rem] leading-tight font-extrabold text-ln-dark">
+        Specialløsninger
+      </h1>
+
+      <p class="text-body text-ln-dark">
+        Skræddersyede AI-flows der løser præcis jeres udfordring.
+      </p>
+
+      <div class="flex gap-4">
+        <Button href="#kontakt" variant="primary">Kontakt os</Button>
+        <Button href="#videnscenter" variant="secondary">Videnscenter</Button>
+      </div>
+    </div>
+
+    <!-- Image -->
+    <div class="hidden lg:block">
+      <img src={heroImg} alt="" class="rounded-2xl shadow-xl w-full h-auto" />
+    </div>
+  </div>
+</section> 
