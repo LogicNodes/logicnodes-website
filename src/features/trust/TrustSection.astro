@@ -1,0 +1,186 @@
+---
+import Card from '@components/Card.astro';
+import Icon from '@lib/Icon.astro';
+import { SPECIALS } from './specials.data';
+import { TESTIMONIALS } from './testimonials.data';
+import { LOGOS } from './logos.data';
+import { Image } from 'astro:assets';
+---
+
+<section id="trust" class="bg-ln-light py-section px-gutter">
+  <div class="max-w-7xl mx-auto space-y-16">
+
+    <!-- Specialløsninger carousel -->
+    <div class="relative py-4 px-4">
+      <!-- prev button -->
+      <button
+        id="specialsPrev"
+        class="absolute -left-6 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center h-12 w-12 text-ln-dark hover:scale-105 transition"
+        aria-label="Forrige"
+      >
+        <Icon name="arrow-left" class="w-16 h-16" />
+      </button>
+
+      <!-- next button -->
+      <button
+        id="specialsNext"
+        class="absolute -right-6 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center h-12 w-12 text-ln-dark hover:scale-105 transition"
+        aria-label="Næste"
+      >
+        <Icon name="arrow-right" class="w-16 h-16" />
+      </button>
+
+      <!-- carousel masking container with clip path -->
+      <div class="overflow-hidden rounded-xl">
+        <!-- carousel container with padding for visible items' shadows -->
+        <div
+          id="specialsCarousel"
+          class="overflow-visible pt-8 pb-12 px-4 mx-auto"
+        >
+          <!-- carousel track with negative margins to hide edges -->
+          <div class="flex transition-transform duration-300 mx-[-2%]" id="specialsTrack">
+            {[...SPECIALS, ...SPECIALS, ...SPECIALS].map((s, i) => (
+              <a href={s.link} class="w-[33.333%] flex-shrink-0 px-6 group">
+                <Card
+                  class="bg-ln-dark text-white text-center space-y-3 flex flex-col min-h-[550px] h-full shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:translate-y-[-4px] group-hover:scale-[1.01]"
+                  tight
+                >
+                  <div class="flex-1 flex flex-col items-center justify-center py-12">
+                    <img src={s.icon} alt="" class="mx-auto w-16 h-16 mb-8 transition-transform group-hover:scale-110 duration-300" />
+                    <h3 class="font-bold text-heading-md mb-5">{s.title}</h3>
+                    <p class="text-body max-w-xs">{s.body}</p>
+                  </div>
+                </Card>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- carousel script -->
+    <script define:vars={{ specialsCount: SPECIALS.length }}>
+      (() => {
+        const carousel = document.getElementById('specialsCarousel');
+        const track = document.getElementById('specialsTrack');
+        if (!carousel || !track) return;
+
+        const CARD_COUNT = specialsCount;
+        const CARDS_PER_VIEW = 3;
+        const ALL_ITEMS = CARD_COUNT * 3;
+        let currentIndex = 0;
+        
+        function updateCarousel() {
+          if (track) {
+            // Each card is 33.333% width
+            track.style.transform = `translateX(-${currentIndex * 33.333}%)`;
+          }
+        }
+
+        // Initialize
+        updateCarousel();
+
+        // Handle wrapping logic when reaching ends
+        function checkWrap() {
+          if (currentIndex < 0) {
+            // Wrap to end from beginning
+            currentIndex = CARD_COUNT - 1;
+            track.style.transition = 'none';
+            updateCarousel();
+            setTimeout(() => {
+              track.style.transition = 'transform 300ms';
+            }, 50);
+          } else if (currentIndex >= CARD_COUNT) {
+            // Wrap to beginning from end
+            currentIndex = 0;
+            track.style.transition = 'none';
+            updateCarousel();
+            setTimeout(() => {
+              track.style.transition = 'transform 300ms';
+            }, 50);
+          }
+        }
+
+        const prevBtn = document.getElementById('specialsPrev');
+        const nextBtn = document.getElementById('specialsNext');
+
+        prevBtn?.addEventListener('click', () => {
+          currentIndex--;
+          updateCarousel();
+          setTimeout(checkWrap, 320);
+        });
+
+        nextBtn?.addEventListener('click', () => {
+          currentIndex++;
+          updateCarousel();
+          setTimeout(checkWrap, 320);
+        });
+      })();
+    </script>
+
+    <!-- Testimonials -->
+    <div>
+      <h2 class="text-heading-lg font-extrabold text-ln-dark mb-10 text-center">
+        Hvad siger kunderne?
+      </h2>
+
+      <div class="grid gap-8 md:grid-cols-3">
+        {TESTIMONIALS.map(t => (
+          <blockquote class="bg-white p-8 rounded-2xl shadow-xl space-y-4">
+            <p class="text-body leading-relaxed text-ln-dark">&ldquo;{t.quote}&rdquo;</p>
+            <footer class="text-sm font-semibold text-ln-dark/80">
+              {t.avatar && (
+                <Image src={t.avatar} alt="" class="inline mr-2 w-6 h-6 rounded-full" width={24} height={24} />
+              )}
+              {t.name}
+              <br />
+              <span class="font-normal">{t.role}</span>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+
+    <!-- Logo Slider -->
+    <div class="overflow-hidden w-full relative">
+      <!-- Left fade -->
+      <div class="absolute left-0 top-0 h-full w-24 z-10 bg-gradient-to-r from-ln-light to-transparent pointer-events-none"></div>
+      
+      <div class="flex gap-16 animate-scroll w-max">
+        {[...LOGOS, ...LOGOS].map((l, i) => (
+          <div class="flex items-center justify-center w-[180px] h-16">
+            <Image
+              src={l.src}
+              alt={l.alt}
+              width={180}
+              height={60}
+              class="max-h-16 max-w-[180px] w-auto h-auto opacity-50 hover:opacity-100 transition"
+              style="object-fit: contain;"
+            />
+          </div>
+        ))}
+      </div>
+      
+      <!-- Right fade -->
+      <div class="absolute right-0 top-0 h-full w-24 z-10 bg-gradient-to-l from-ln-light to-transparent pointer-events-none"></div>
+    </div>
+  </div>
+
+  <style is:global>
+    @keyframes scroll {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-scroll {
+      animation: scroll 60s linear infinite;
+      will-change: transform;
+    }
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</section> 
