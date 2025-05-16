@@ -1,6 +1,8 @@
 ---
 import Icon from '@lib/Icon.astro';
 import NeuralGraph from './NeuralGraph/NeuralGraph.tsx';
+import Button from '@components/Button.astro';
+import Card from '@components/Card.astro';
 ---
 <section class="bg-ln-light py-section overflow-hidden px-gutter">
   <!-- Grid: 1 column on mobile, 2 columns ≥lg -->
@@ -17,18 +19,12 @@ import NeuralGraph from './NeuralGraph/NeuralGraph.tsx';
       </h1>
 
       <div class="flex gap-4 max-w-xl">
-        <a
-          href="#kontakt"
-          class="flex-1 bg-ln-accent text-white font-semibold py-3 px-6 rounded-2xl text-center hover:bg-orange-500 transition"
-        >
+        <Button href="#kontakt" variant="primary">
           Kontakt os
-        </a>
-        <a
-          href="#specialloesninger"
-          class="flex-1 border-2 border-ln-accent text-ln-accent font-semibold py-3 px-6 rounded-2xl text-center hover:bg-ln-accent hover:text-white transition"
-        >
+        </Button>
+        <Button href="#specialloesninger" variant="secondary">
           Specialløsninger
-        </a>
+        </Button>
       </div>
     </div>
 
@@ -50,27 +46,27 @@ import NeuralGraph from './NeuralGraph/NeuralGraph.tsx';
 
   <!-- Selling Points -->
   <div class="max-w-7xl mx-auto mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8">
-    <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow text-left space-y-3">
-        <h3 class="font-bold text-heading-md text-ln-dark flex items-center gap-2">
+    <Card tight class="hover:shadow-2xl transition-shadow text-left space-y-3">
+      <h3 class="font-bold text-heading-md text-ln-dark flex items-center gap-2">
         <Icon name="zap" class="w-6 h-6 text-ln-accent" />
         Højere produktivitet
       </h3>
       <p class="text-body text-ln-dark">
         Automatisér repetitive opgaver én gang med en skræddersyet AI-løsning, og frigør medarbejdernes tid til det, der virkelig skaber værdi.
       </p>
-    </div>
+    </Card>
 
-    <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow text-left space-y-3">
-        <h3 class="font-bold text-heading-md text-ln-dark flex items-center gap-2">
+    <Card tight class="hover:shadow-2xl transition-shadow text-left space-y-3">
+      <h3 class="font-bold text-heading-md text-ln-dark flex items-center gap-2">
         <Icon name="banknote-arrow-down" class="w-6 h-6 text-ln-accent" />
         Lavere omkostninger
       </h3>
       <p class="text-body text-ln-dark">
         Udnyt AI til at minimere brugen af dyre konsulenttimer. Opnå bedre resultater hurtigere og mere effektivt.
       </p>
-    </div>
+    </Card>
 
-    <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow text-left space-y-3">
+    <Card tight class="hover:shadow-2xl transition-shadow text-left space-y-3">
       <h3 class="font-bold text-heading-md text-ln-dark flex items-center gap-2">
         <Icon name="chart-pie" class="w-6 h-6 text-ln-accent" />
         Bedre beslutninger
@@ -78,6 +74,6 @@ import NeuralGraph from './NeuralGraph/NeuralGraph.tsx';
       <p class="text-body text-ln-dark">
         Lad AI strukturere og analysere kritisk information, så I kan træffe hurtigere, skarpere og mere profitable beslutninger.
       </p>
-    </div>
+    </Card>
   </div>
 </section>

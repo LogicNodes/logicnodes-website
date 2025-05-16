@@ -16,6 +16,7 @@ import decisionsIcon  from '@assets/icons/graph/decisions.svg?url'
 import notifyIcon     from '@assets/icons/graph/notify.svg?url'
 import syncIcon       from '@assets/icons/graph/sync.svg?url'
 import reportIcon     from '@assets/icons/graph/report.svg?url'
+import { COLORS } from '@lib/colors'
 
 export type GraphNode = {
     id: string
@@ -35,9 +36,9 @@ export type GraphNode = {
   
   // Colors
   export const GRAPH_COLORS = {
-    node: '#3f495d',     // ln.dark
-    line: '#3f495d',     // ln.dark
-    accent: '#ff931e',   // ln.accent
+    node: COLORS.dark,
+    line: COLORS.dark,
+    accent: COLORS.accent,
   }
   
   export const SIZE = {

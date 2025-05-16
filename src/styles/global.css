@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ln-accent: theme('colors.ln.accent');
+  --ln-dark:   theme('colors.ln.dark');
+  --ln-light:  theme('colors.ln.light');
+  --ln-white:  theme('colors.white');
+  --ln-bg:     theme('colors.ln.bg');
+}
+
 body {
   font-family: 'Readex Pro', system-ui, sans-serif;
-  background: #f9f9f9;
-}
-:root {
-  --tw-color-ln-dark: theme('colors.ln.dark');
-  --tw-color-ln-accent: theme('colors.ln.accent');
+  background: theme('colors.ln.bg');
 }

@@ -10,6 +10,9 @@ import React, {
   // Import data from the local data file
   import { CARDS, ACCENT, DARK, LIGHT, X, R, ICON_SCALE } from './cards.data';
   
+  // Shadow properties
+  const SHADOW_OPACITY = 0.2;
+  
   export default function ServicesSection() {
     const [active, setActive] = useState(-1);           // −1 = none
     const [centers, setCenters] = useState<number[]>([]);
@@ -60,7 +63,7 @@ import React, {
                     dx="0"
                     dy="4"
                     stdDeviation="4"
-                    floodColor="rgba(0,0,0,.20)"
+                    floodColor={`rgba(0,0,0,${SHADOW_OPACITY})`}
                   />
                 </filter>
               </defs>

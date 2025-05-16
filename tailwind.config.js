@@ -1,15 +1,22 @@
 // tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,ts,tsx}'],
   theme: {
-    extend: {
-      colors: {
-        ln: {
-          accent: '#ff931e',
-          light: '#f2f9ff',
-          dark: '#3f495d',
-        },
+    colors: {
+      /* default Tailwind colours … */
+      white:  '#ffffff',                 // new token
+      ln: {                              // ↳ LogicNodes palette
+        accent: '#ff931e',
+        light:  '#f2f9ff',
+        dark:   '#3f495d',
+        bg:     '#f9f9f9',               // body background color
       },
+      transparent: 'transparent',        // keep Tailwind utilities working
+      current:     'currentColor',
+      black: '#000000',                  // needed for shadows
+    },
+    extend: {
       fontFamily: {
         sans: ['"Readex Pro"', 'system-ui', 'sans-serif'],
       },
@@ -24,6 +31,9 @@ module.exports = {
         section: '5rem',
         gutter: '2rem',
       },
+      opacity: {
+        '20': '0.2',  // For shadow opacity
+      }
     },
   },
 };
