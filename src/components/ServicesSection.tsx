@@ -7,6 +7,12 @@ import React, {
   } from 'react';
   import clsx from 'clsx';
   
+  // Import icons using the new path structure
+  import infoIcon from '@/assets/icons/graph/info.svg?url';
+  import insightIcon from '@/assets/icons/graph/insight.svg?url';
+  import implementIcon from '@/assets/icons/graph/implement.svg?url';
+  import customIcon from '@/assets/icons/graph/custom.svg?url';
+  
   const ACCENT = '#ff931e';   // ln.accent
   const DARK   = '#3f495d';   // ln.dark (node outline when idle)
   const LIGHT  = '#f2f9ff';   // ln.light (node fill + default wire)
@@ -16,25 +22,25 @@ import React, {
       title: 'Indsigt',
       body:
         'Få en klar forståelse af, hvad AI er, og hvordan konkrete værktøjer allerede i dag kan forbedre effektiviteten i jeres virksomhed.',
-      icon: '/icons/info.svg',
+      icon: infoIcon,
     },
     {
       title: 'Identifikation',
       body:
         'Opnå overblik over de områder i jeres forretning, hvor AI har størst potentiale til at skabe værdi og forbedre arbejdsgange.',
-      icon: '/icons/insight.svg',
+      icon: insightIcon,
     },
     {
       title: 'Implementering',
       body:
         'Få hjælp til at implementere AI i jeres arbejds­gange gennem et struktureret forløb med udgangspunkt i jeres hverdag.',
-      icon: '/icons/implement.svg',
+      icon: implementIcon,
     },
     {
       title: 'Innovation',
       body:
         'Differentiér jer med innovative AI-løsninger, der er specialdesignet til jeres virksomhed og jeres udfordringer.',
-      icon: '/icons/custom.svg',
+      icon: customIcon,
     },
   ];
   

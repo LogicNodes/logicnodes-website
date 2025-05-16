@@ -6,6 +6,8 @@
 // – left column: dark card with contact details
 // – right column: white card with form   →  sends via EmailJS
 // -----------------------------------------------------------------
+
+import Icon from './Icon.astro';
 ---
 
 <section id="kontakt" class="bg-ln-light py-section px-gutter">
@@ -27,18 +29,18 @@
   
         <ul class="space-y-3 text-body">
           <li class="flex items-center gap-3">
-            <img src="/icons/email.svg" class="w-5 h-5" alt="" />
+            <Icon name="zap" class="w-5 h-5" />
             <a href="mailto:kontakt@logicnodes.ai"
                class="hover:text-ln-accent">
               kontakt@logicnodes.ai
             </a>
           </li>
           <li class="flex items-center gap-3">
-            <img src="/icons/phone.svg" class="w-5 h-5" alt="" />
+            <Icon name="chart-pie" class="w-5 h-5" />
             +45&nbsp;40&nbsp;90&nbsp;62&nbsp;13
           </li>
           <li class="flex items-center gap-3">
-            <img src="/icons/location.svg" class="w-5 h-5" alt="" />
+            <Icon name="banknote-arrow-down" class="w-5 h-5" />
             Slet&nbsp;Møllevej&nbsp;20, 8310&nbsp;Tranbjerg, Aarhus
           </li>
         </ul>

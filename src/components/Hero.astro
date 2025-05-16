@@ -1,5 +1,5 @@
 ---
-import { Zap, BanknoteArrowDown, ChartPie } from '../icons';
+import Icon from './Icon.astro';
 import NeuralGraph from './NeuralGraph.tsx';
 ---
 <section class="bg-ln-light py-section overflow-hidden px-gutter">
@@ -52,7 +52,7 @@ import NeuralGraph from './NeuralGraph.tsx';
   <div class="max-w-7xl mx-auto mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8">
     <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow text-left space-y-3">
         <h3 class="font-bold text-heading-md text-ln-dark flex items-center gap-2">
-        <Zap class="w-6 h-6 text-ln-accent" />
+        <Icon name="zap" class="w-6 h-6 text-ln-accent" />
         Højere produktivitet
       </h3>
       <p class="text-body text-ln-dark">
@@ -62,7 +62,7 @@ import NeuralGraph from './NeuralGraph.tsx';
 
     <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow text-left space-y-3">
         <h3 class="font-bold text-heading-md text-ln-dark flex items-center gap-2">
-        <BanknoteArrowDown class="w-6 h-6 text-ln-accent" />
+        <Icon name="banknote-arrow-down" class="w-6 h-6 text-ln-accent" />
         Lavere omkostninger
       </h3>
       <p class="text-body text-ln-dark">
@@ -72,7 +72,7 @@ import NeuralGraph from './NeuralGraph.tsx';
 
     <div class="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow text-left space-y-3">
       <h3 class="font-bold text-heading-md text-ln-dark flex items-center gap-2">
-        <ChartPie class="w-6 h-6 text-ln-accent" />
+        <Icon name="chart-pie" class="w-6 h-6 text-ln-accent" />
         Bedre beslutninger
       </h3>
       <p class="text-body text-ln-dark">
