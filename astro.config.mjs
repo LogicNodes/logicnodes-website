@@ -1,23 +1,22 @@
 // astro.config.mjs
 
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import svgr from 'vite-plugin-svgr';
+import { defineConfig }  from 'astro/config';
+import tailwind          from '@astrojs/tailwind';
+import react             from '@astrojs/react';
+import svgr              from 'vite-plugin-svgr';
 import { fileURLToPath } from 'url';
-import path from 'path';
-
-import react from '@astrojs/react';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   integrations: [tailwind(), react()],
-  vite: { 
+  vite: {
     plugins: [svgr()],
-    resolve: { 
-      alias: { 
-        '@': path.resolve(__dirname, './src')
-      } 
-    }
-  }
+    resolve: {
+      alias: {
+        '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
+        '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
+        '@features': fileURLToPath(new URL('./src/features', import.meta.url)),
+        '@lib': fileURLToPath(new URL('./src/lib', import.meta.url)),
+      },
+    },
+  },
 });

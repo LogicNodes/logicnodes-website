@@ -9,7 +9,7 @@ import React, {
     type MouseEvent
   } from 'react'
   import ForceGraph2D, { type ForceGraphMethods } from 'react-force-graph-2d'
-  import { NODES, LINKS, ICONS, GRAPH_COLORS, SIZE } from '../config/graph'
+  import { NODES, LINKS, ICONS, GRAPH_COLORS, SIZE } from './graph.data'
   
   // --- constants -------------------------------------------------------------
   const SPEED = 150;               // px / second that a pulse travels
