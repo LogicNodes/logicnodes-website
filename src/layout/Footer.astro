@@ -1,35 +1,33 @@
 ---
-// src/components/Footer.astro
+// Responsive Footer
 import logoNameSvg from '@assets/logos/logo_name.svg?url';
 ---
 <footer class="bg-ln-dark text-white px-gutter py-14">
-  <!-- Align the two columns on their bottom edge from md‑breakpoint and up -->
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end gap-12">
-
-    <!-- ───── Left column – logo ─────────────────────────────── -->
-    <div class="shrink-0 w-60">
+  <div class="max-w-7xl mx-auto flex flex-col items-center md:flex-row md:items-end gap-12">
+    <!-- Logo -->
+    <div class="shrink-0 w-48 md:w-60 order-1 md:order-none">
       <a href="/" class="block">
-        <img src={logoNameSvg} alt="LogicNodes logo" class="h-28 w-auto" />
+        <img src={logoNameSvg} alt="LogicNodes logo" class="h-24 md:h-28 w-auto mx-auto" />
       </a>
     </div>
 
-    <!-- RIGHT COLUMN -->
-    <div class="flex-1 flex flex-col">
-
-      <!-- Nav – stay glued to the contact line -->
-      <nav class="mt-auto self-end mb-0">
-        <ul class="space-y-2 text-right">
-          <li><a href="#specialloesninger" class="hover:text-ln-accent transition">Specialløsninger</a></li>
-          <li><a href="#jobside"          class="hover:text-ln-accent transition">Jobside</a></li>
-          <li><a href="#videnscenter"     class="hover:text-ln-accent transition">Videnscenter</a></li>
-        </ul>
-      </nav>
-
+    <!-- Contact & Nav -->
+    <div class="flex-1 flex flex-col items-center md:items-stretch text-center md:text-left order-3 md:order-none w-full">
       <!-- Contact line -->
-      <div class="flex flex-wrap gap-x-12 gap-y-2 text-sm text-white/80 border-b border-ln-accent pb-2">
+      <div class="flex flex-col sm:flex-row justify-center sm:justify-start gap-2 sm:gap-x-12 text-sm text-white/80 border-b border-ln-accent pb-4 w-full mb-6 md:mb-2">
         <span>kontakt@logicnodes.ai</span>
         <span>CVR: 45318362</span>
         <span>+45&nbsp;40&nbsp;90&nbsp;62&nbsp;13</span>
       </div>
+
+      <!-- Nav -->
+      <nav class="w-full">
+        <ul class="flex flex-col sm:flex-row justify-center sm:justify-start gap-4 sm:gap-6 text-base font-medium">
+          <li><a href="#specialloesninger" class="hover:text-ln-accent transition">Specialløsninger</a></li>
+          <li><a href="#jobside" class="hover:text-ln-accent transition">Jobside</a></li>
+          <li><a href="#videnscenter" class="hover:text-ln-accent transition">Videnscenter</a></li>
+        </ul>
+      </nav>
     </div>
+  </div>
 </footer>
