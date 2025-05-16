@@ -1,5 +1,5 @@
 ---
-// src/components/ContactSection.astro
+// src/features/contact/ContactSection.astro
 //
 // "Kontakt" section
 // – bg: ln.light
@@ -7,7 +7,8 @@
 // – right column: white card with form   →  sends via EmailJS
 // -----------------------------------------------------------------
 
-import Icon from './Icon.astro';
+import Icon from '@lib/Icon.astro';
+import { EMAIL_JS, CONTACT_INFO } from './contact.data';
 ---
 
 <section id="kontakt" class="bg-ln-light py-section px-gutter">
@@ -30,18 +31,18 @@ import Icon from './Icon.astro';
         <ul class="space-y-3 text-body">
           <li class="flex items-center gap-3">
             <Icon name="zap" class="w-5 h-5" />
-            <a href="mailto:kontakt@logicnodes.ai"
+            <a href={`mailto:${CONTACT_INFO.email}`}
                class="hover:text-ln-accent">
-              kontakt@logicnodes.ai
+              {CONTACT_INFO.email}
             </a>
           </li>
           <li class="flex items-center gap-3">
             <Icon name="chart-pie" class="w-5 h-5" />
-            +45&nbsp;40&nbsp;90&nbsp;62&nbsp;13
+            {CONTACT_INFO.phone}
           </li>
           <li class="flex items-center gap-3">
             <Icon name="banknote-arrow-down" class="w-5 h-5" />
-            Slet&nbsp;Møllevej&nbsp;20, 8310&nbsp;Tranbjerg, Aarhus
+            {CONTACT_INFO.address}
           </li>
         </ul>
       </div>
@@ -111,13 +112,13 @@ import Icon from './Icon.astro';
     </div>
   </section>
 
-  <script is:inline>
+  <script is:inline define:vars={{ EMAIL_JS }}>
     // The global `emailjs` is defined once the UMD file above has loaded.
     window.addEventListener('DOMContentLoaded', () => {
-      emailjs.init('dDIZKjyEIK4FmwovM');      // PUBLIC key
+      emailjs.init(EMAIL_JS.PUBLIC_KEY);      // PUBLIC key
   
-      const SERVICE  = 'service_79qlwra';         // must start with "service_"
-      const TEMPLATE = 'template_0c7sawl';        // must start with "template_"
+      const SERVICE  = EMAIL_JS.SERVICE;         // must start with "service_"
+      const TEMPLATE = EMAIL_JS.TEMPLATE;        // must start with "template_"
   
       const form   = document.getElementById('kontaktForm');
       const status = document.getElementById('formStatus');
