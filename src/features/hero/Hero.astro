@@ -18,14 +18,15 @@ import Card from '@components/Card.astro';
         øget profit – <span class="text-ln-accent">med AI.</span>
       </h1>
 
-      <div class="flex gap-4 max-w-xl">
-        <Button href="#kontakt" variant="primary">
+      <div class="flex gap-4">
+        <!-- Outline first, filled second (matches the mockup) -->
+        <Button href="#kontakt" variant="primary" className="flex-1">
           Kontakt os
         </Button>
-        <Button href="#specialloesninger" variant="secondary">
+        <Button href="#specialloesninger" variant="secondary" className="flex-1">
           Specialløsninger
         </Button>
-      </div>
+      </div>      
     </div>
 
     <!-- ── Column 2 (graph) ───── -->

@@ -3,9 +3,10 @@ export interface Props {
   href: string;
   variant?: 'primary' | 'secondary';
   size?: 'sm' | 'md';
+  className?: string;
 }
 
-const { href, variant = 'primary', size = 'md' } = Astro.props;
+const { href, variant = 'primary', size = 'md', className } = Astro.props;
 
 const base   = 'font-semibold rounded-2xl transition inline-block text-center';
 const sizes  = { sm: 'py-2 px-4 text-sm', md: 'py-3 px-6' };
@@ -16,7 +17,7 @@ const styles = {
 ---
 <a
   href={href}
-  class={`${base} ${sizes[size]} ${styles[variant]}`.trim()}
+  class={`${base} ${sizes[size]} ${styles[variant]} ${className}`.trim()}
 >
   <slot />
 </a> 
