@@ -1,51 +1,45 @@
 ---
-// WhyAI – "En teknologisk revolution"
+/*
+  Why‑AI section refactor
+  • Graphic only loads ≥ lg (1024 px) – hidden on phones
+  • Text card now flows with normal vertical rhythm on small screens
+*/
 import WhyAIGraphic from './WhyAIGraphic.astro';
 ---
-
 <section class="bg-ln-light py-section px-gutter">
   <div class="mx-auto max-w-7xl relative">
     <div class="flex flex-col lg:flex-row items-start">
-      <!-- ── TEXT CARD ──────────────────────────────────────────────── -->
-      <div class="relative z-10 lg:w-3/5 mb-16 lg:mb-0 mt-32 lg:mt-48">
+      <!-- ── TEXT CARD ────────────────────────────────────────────── -->
+      <div class="relative z-10 w-full lg:w-3/5 mb-16 lg:mb-0 mt-16 sm:mt-24 lg:mt-48">
         <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10">
           <span class="uppercase tracking-wider text-sm font-semibold text-ln-accent">
             HVORFOR AI?
           </span>
-
           <h2 class="mt-2 text-heading-xl font-extrabold leading-tight text-ln-dark">
-            En teknologisk&nbsp;revolution
+            En teknologisk revolution
           </h2>
-
           <p class="mt-4 space-y-4 text-body text-ln-dark">
-            Mange virksomheder ved, at AI rummer et stort potentiale – men
-            få har et klart billede af, helt konkret hvordan.<br /><br />
-            Computeren virkede også abstrakt i starten. I dag er den
-            uundværlig i enhver virksomhed.<br /><br />
+            Mange virksomheder ved, at AI rummer et stort potentiale – men få har et klart billede af, helt konkret hvordan.<br /><br />
+            Computeren virkede også abstrakt i starten. I dag er den uundværlig i enhver virksomhed.<br /><br />
             AI er den næste revolution – og første skridt er indsigt.<br /><br />
-            Book en gratis samtale med en AI-ekspert fra LogicNodes. På
-            under en time får I overblik over mulighederne og er klar til at
-            tage det første skridt.
+            Book en gratis samtale med en AI-ekspert fra LogicNodes. På under en time får I overblik over mulighederne og er klar til at tage det første skridt.
           </p>
-          
-          <a
-            href="#kontakt"
-            class="mt-6 inline-block bg-ln-accent text-white font-semibold py-3 px-6 rounded-2xl text-center hover:bg-orange-500 transition"
-          >
+          <a href="#kontakt" class="mt-6 inline-block bg-ln-accent text-white font-semibold py-3 px-6 rounded-2xl text-center hover:bg-orange-500 transition">
             Kontakt os
           </a>
         </div>
       </div>
 
-      <!-- ── GRAPHIC ─────────────────────────────────────────────────── -->
-      <div class="w-full lg:w-1/2 lg:absolute lg:right-0 lg:top-16">
+      <!-- ── GRAPHIC – desktop only ─────────────────────────────── -->
+      <div class="hidden lg:block w-full lg:w-1/2 lg:absolute lg:right-0 lg:top-16">
         <WhyAIGraphic
           class="pointer-events-none w-full h-auto scale-110 lg:scale-125 max-w-full"
           aria-hidden="true"
         />
       </div>
     </div>
-    <!-- Spacer div with responsive height that adjusts to content -->
-    <div class="h-[100px] md:h-[150px] lg:h-[300px]"></div>
+
+    <!-- Spacer for overlap – shorter on mobile -->
+    <div class="h-16 sm:h-24 lg:h-[300px]"></div>
   </div>
 </section>
