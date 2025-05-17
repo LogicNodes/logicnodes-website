@@ -1,38 +1,38 @@
 ---
 // src/features/specials/SpecialHero.astro
+
+import Card from '@components/Card.astro';
 import Button from '@components/Button.astro';
-// Using placeholder image path until actual hero image is available
-const heroImg = '/placeholder-hero.jpg';
+import SectorsGraph from './SectorsGraph.astro';
+
+// Replace with real image when available
+const heroImg = '/placeholder-special-hero.jpg';
 ---
 
 <section class="bg-ln-light py-section px-gutter overflow-hidden">
-  <div
-    class="max-w-7xl mx-auto grid gap-16
-           lg:grid-cols-[minmax(0,45%)_minmax(320px,55%)] lg:items-center">
+  <div class="relative max-w-7xl mx-auto grid gap-16 lg:grid-cols-[minmax(0,45%)_minmax(320px,40%)] lg:items-center">
+    <!-- TEXT / CARD (left on desktop) -->
+    <Card tight class="relative z-10 bg-white shadow-xl order-2 lg:order-1 lg:max-w-[calc(100%+40px)] lg:mr-[-40px]">
+      <span class="uppercase tracking-wider text-sm font-semibold text-ln-accent">TIL ENHVER BRANCHE</span>
+      <h1 class="mt-1 text-heading-xl font-extrabold text-ln-dark leading-tight">Unik logik</h1>
+      <p class="mt-4 text-body text-ln-dark">
+        Ingen virksomheder er ens – og det er deres udfordringer heller ikke. 
+        Hos LogicNodes udvikler vi specialdesignede AI-løsninger, der tager højde for netop din virksomheds behov, branche og arbejdsgange.<br /><br />
+        Her kan du se et udvalg af de unikke løsninger, vi har skabt i samarbejde med vores kunder.
+      </p>      
+      <div class="flex gap-4 mt-8">
+        <!-- Outline first, filled second (matches the mockup) -->
+        <Button href="#kontakt" variant="primary" className="flex-1">
+          Kontakt os
+        </Button>
+      </div>
+    </Card>
 
-    <!-- Copy -->
-    <div class="space-y-6">
-      <span class="uppercase tracking-wider text-sm font-semibold text-ln-accent">
-        Hvorfor AI / Specialløsninger
-      </span>
-
-      <h1 class="text-[3rem] leading-tight font-extrabold text-ln-dark">
-        Specialløsninger
-      </h1>
-
-      <p class="text-body text-ln-dark">
-        Skræddersyede AI-flows der løser præcis jeres udfordring.
-      </p>
-
-      <div class="flex gap-4">
-        <Button href="#kontakt" variant="primary">Kontakt os</Button>
-        <Button href="#videnscenter" variant="secondary">Videnscenter</Button>
+    <!-- GRAPH (right on desktop) -->
+    <div class="order-1 lg:order-2 relative">
+      <div class="w-full lg:w-[200%] lg:-ml-[20%]">
+        <SectorsGraph class="w-full h-auto lg:h-[550px]" />
       </div>
     </div>
-
-    <!-- Image -->
-    <div class="hidden lg:block">
-      <img src={heroImg} alt="" class="rounded-2xl shadow-xl w-full h-auto" />
-    </div>
   </div>
-</section> 
+</section>

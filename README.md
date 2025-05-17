@@ -1,6 +1,6 @@
 # Special Solutions Components
 
-This directory contains components for the Special Solutions (Specialløsninger) page, implemented as a data-driven pattern.
+This directory contains components for the Special Solutions (Unik logik) page, implemented as a data-driven pattern.
 
 ## Components Overview
 
