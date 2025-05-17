@@ -5,6 +5,7 @@
   • Text card now flows with normal vertical rhythm on small screens
 */
 import WhyAIGraphic from './WhyAIGraphic.astro';
+import Button from '@components/Button.astro';
 ---
 <section class="bg-ln-light py-section px-gutter">
   <div class="mx-auto max-w-7xl relative">
@@ -24,9 +25,12 @@ import WhyAIGraphic from './WhyAIGraphic.astro';
             AI er den næste revolution – og første skridt er indsigt.<br /><br />
             Book en gratis samtale med en AI-ekspert fra LogicNodes. På under en time får I overblik over mulighederne og er klar til at tage det første skridt.
           </p>
-          <a href="#kontakt" class="mt-6 inline-block bg-ln-accent text-white font-semibold py-3 px-6 rounded-2xl text-center hover:bg-orange-500 transition">
-            Kontakt os
-          </a>
+          <div class="flex gap-4 mt-6">
+            <!-- Outline first, filled second (matches the mockup) -->
+            <Button href="#kontakt" variant="primary" className="flex-1">
+              Kontakt os
+            </Button>
+          </div>
         </div>
       </div>
 

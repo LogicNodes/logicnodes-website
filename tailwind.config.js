@@ -8,6 +8,7 @@ module.exports = {
       white:  '#ffffff',                 // new token
       ln: {                              // ↳ LogicNodes palette
         accent: '#ff931e',
+        'accent-dark': '#e87800',        // darker version of accent
         light:  '#f2f9ff',
         dark:   '#3f495d',
         bg:     '#f9f9f9',               // body background color
