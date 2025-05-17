@@ -19,7 +19,7 @@ export const steps = [
   },
   {
     num: 4,
-    title: 'Specialløsninger',
+    title: 'Unik logik',
     body:
       `Vi tilbyder specialudviklede AI-løsninger, der er skræddersyet til jeres specifikke behov. Uanset om det drejer sig om unikke arbejdsgange, komplekse data eller særlige integrationskrav, udvikler vi løsninger, der passer præcist til jeres virksomhed og mål.`,
   },

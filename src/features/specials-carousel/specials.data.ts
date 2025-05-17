@@ -10,27 +10,27 @@ export const SPECIALS = [
     body:
       'Virk-agenten er en AI der har adgang til alle oplysningerne på virk.',
     icon: insightIcon,
-    link: '/speciallosninger#virk-agenten',
+    link: '/unik-logik#virk-agenten',
   },
   {
     title: 'LogicNodes Platformen',
     body:
       'LogicNodes Platformen er en AI-platform der kan hjælpe med at automatisere arbejdsgange og forbedre effektiviteten i jeres virksomhed.',
     icon: implementIcon,
-    link: '/speciallosninger#logicnodes-platformen',
+    link: '/unik-logik#logicnodes-platformen',
   },
   {
     title: 'Rackbeat-agenten',
     body:
       'Rackbeat-agenten er en AI der har adgang til alle oplysningerne på Rackbeat.',
     icon: customIcon,
-    link: '/speciallosninger#rackbeat-agenten',
+    link: '/unik-logik#rackbeat-agenten',
   },
   {
     title: 'Smart CSRD',
     body:
       'Smart CSRD er et AI-system der udarbejder CSRD-compliant dobbeltvæsentlighedsanalyser',
     icon: customIcon,
-    link: '/speciallosninger#smart-csrd',
+    link: '/unik-logik#smart-csrd',
   },
 ] 
