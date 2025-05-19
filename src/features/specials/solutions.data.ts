@@ -21,7 +21,7 @@ export type Solution = {
 const platformImg = '/images/platform-image.png';
 const virkImg = '/images/virk-image.png';
 const rackImg = '/images/rackbeat-image.png';
-const SCSRDvid = 'https://drive.google.com/uc?export=download&id=187uXeQu-NWilFn4i5szEq16P3vwI6oSv';
+const SCSRDvid = 'https://logicnodes-cdn.b-cdn.net/Case%20R%26M%20_%20Smart%20CSRD.mp4';
 const SCSRDposter = '/images/scsrd-poster.png';
 const serviceImg = '/images/service-image.jpg';
 

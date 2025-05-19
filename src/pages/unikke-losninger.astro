@@ -1,5 +1,5 @@
 ---
-// src/pages/unik-logik.astro
+// src/pages/unikke-losninger.astro
 import BaseLayout from '../layout/BaseLayout.astro';
 import SpecialHero from '@features/specials/SpecialHero.astro';
 import SolutionSection from '@features/specials/SolutionSection.astro';
@@ -9,7 +9,7 @@ import ContactSection from '@features/contact/ContactSection.astro';
 import SpecialIntermezzo from '@features/specials/SpecialIntermezzo.astro';
 ---
 
-<BaseLayout title="Unik logik – LogicNodes">
+<BaseLayout title="Unikke løsninger – LogicNodes">
   <SpecialHero />
 
   {SOLUTIONS.map((solution, i) => (
@@ -20,7 +20,5 @@ import SpecialIntermezzo from '@features/specials/SpecialIntermezzo.astro';
       {i === 1 && <SpecialIntermezzo />}
     </>
   ))}
-
-  <TrustSection />
   <ContactSection />
-</BaseLayout> 
+</BaseLayout>
