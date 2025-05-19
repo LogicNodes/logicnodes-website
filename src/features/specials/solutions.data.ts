@@ -21,7 +21,7 @@ export type Solution = {
 const platformImg = '/images/platform-image.png';
 const virkImg = '/images/virk-image.png';
 const rackImg = '/images/rackbeat-image.png';
-const SCSRDvid = '/videos/scsrd-video.mp4';
+const SCSRDvid = 'https://drive.google.com/uc?export=download&id=187uXeQu-NWilFn4i5szEq16P3vwI6oSv';
 const SCSRDposter = '/images/scsrd-poster.png';
 const serviceImg = '/images/service-image.jpg';
 
