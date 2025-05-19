@@ -1,0 +1,35 @@
+---
+import Card from '@components/Card.astro';
+import Button from '@components/Button.astro';
+import { JOBS } from './jobs.data';
+---
+
+<section id="jobopslag" class="bg-ln-light py-section px-gutter">
+  <div class="max-w-7xl mx-auto grid gap-8 sm:grid-cols-2">
+    {JOBS.map(job => (
+      <Card tight class="bg-white text-ln-dark flex flex-col">
+        {/* kategori badge */}
+        <span class="bg-ln-accent text-white text-xs font-semibold px-3 py-1 rounded-full mb-2 self-start">
+          {job.category}
+        </span>
+
+        {/* titel */}
+        <h2 class="text-heading-md font-bold mb-2">{job.title}</h2>
+
+        {/* beskrivelse */}
+        <div class="text-body mb-6 space-y-4">
+          {job.description.trim().split(/\n{2,}/).map(block => (
+            <p set:html={block.replace(/\n/g, '<br />')} />
+          ))}
+        </div>
+
+        {/* spacer + knap */}
+        <div class="mt-auto pt-2">
+          <Button href="#kontakt" size="sm" variant="primary" className="w-full">
+            Ansøg nu
+          </Button>
+        </div>
+      </Card>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,93 @@
+---
+import Icon           from '@lib/Icon.astro';
+import Button         from '@components/Button.astro';
+import { JOBS }       from './jobs.data';
+import { CONTACT_INFO, EMAIL_JS } from '@features/contact/contact.data';
+---
+
+<section id="kontakt" class="bg-ln-light pt-8 pb-section px-gutter">
+  <div class="max-w-7xl mx-auto grid gap-12
+              lg:grid-cols-[minmax(0,45%)_minmax(320px,55%)] lg:items-start">
+
+    <!-- info-kort -->
+    <div class="bg-ln-dark text-white rounded-2xl p-8 md:p-10 shadow-xl space-y-6">
+      <h2 class="text-heading-lg font-extrabold">
+        Kom i kontakt med en<br /><span class="text-ln-accent">LogicNodes</span>
+      </h2>
+      <p class="text-body">Udfyld formularen – så vender vi hurtigt tilbage.</p>
+
+      <ul class="space-y-3 text-body">
+        <li class="flex items-center gap-3">
+          <Icon name="mail" class="w-5 h-5" />
+          <a href={`mailto:${CONTACT_INFO.email}`} class="hover:text-ln-accent">
+            {CONTACT_INFO.email}
+          </a>
+        </li>
+        <li class="flex items-center gap-3">
+          <Icon name="phone" class="w-5 h-5" />{CONTACT_INFO.phone}
+        </li>
+        <li class="flex items-center gap-3">
+          <Icon name="location" class="w-5 h-5" />{CONTACT_INFO.address}
+        </li>
+      </ul>
+    </div>
+
+    <!-- formular -->
+    <form id="jobForm"
+          class="bg-white rounded-2xl shadow-xl p-8 md:p-10 w-full space-y-6">
+      <input type="text" name="bot-field" class="hidden" />
+
+      <div class="grid gap-4">
+        <input required type="text" name="name"  placeholder="Dit navn"
+               class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 placeholder:text-ln-dark/70" />
+        <input required type="email" name="email" placeholder="Din e-mail"
+               class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 placeholder:text-ln-dark/70" />
+        <input type="tel" name="phone" placeholder="Dit tlf. nr."
+               class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 placeholder:text-ln-dark/70" />
+
+        <!-- dynamisk dropdown -->
+        <select name="position" required
+                class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 text-ln-dark/70 bg-transparent">
+          {JOBS.map(j => <option value={j.title}>{j.title}</option>)}
+          <option value="Uopfordret ansøgning">Uopfordret ansøgning</option>
+        </select>
+
+        <textarea name="message" rows="3" placeholder="Besked"
+                  class="border-b border-gray-300 focus:outline-none focus:border-ln-accent py-3 placeholder:text-ln-dark/70 resize-none"></textarea>
+      </div>
+
+      <button type="submit" 
+              class="bg-ln-accent text-white font-semibold py-2.5 px-12 rounded-2xl hover:bg-ln-accent-dark transition self-start">
+        Send
+      </button>
+      <p id="formStatus" class="text-sm mt-3 text-ln-accent min-h-[1.25rem]"></p>
+    </form>
+  </div>
+
+  <!-- EmailJS -->
+  <script is:inline define:vars={{ EMAIL_JS }}>
+    window.addEventListener('DOMContentLoaded', () => {
+      emailjs.init(EMAIL_JS.PUBLIC_KEY);
+      const { SERVICE, TEMPLATE } = EMAIL_JS;
+
+      const form   = document.getElementById('jobForm');
+      const status = document.getElementById('formStatus');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (form['bot-field'].value) return;
+
+        status.textContent = 'Sender …';
+        try {
+          await emailjs.sendForm(SERVICE, TEMPLATE, form);
+          status.textContent = 'Tak for din ansøgning! Vi vender tilbage.';
+          form.reset();
+        } catch (err) {
+          console.error(err);
+          status.textContent =
+            'Noget gik galt – prøv igen eller send os en mail direkte.';
+        }
+      });
+    });
+  </script>
+</section> 
