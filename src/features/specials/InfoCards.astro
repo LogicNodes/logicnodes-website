@@ -1,0 +1,30 @@
+---
+// src/features/specials/InfoCards.astro
+import Card from '@components/Card.astro';
+import Icon from '@lib/Icon.astro';
+import type { Card as CardType } from './solutions.data';
+
+export interface Props {
+  cards: CardType[];
+}
+
+const { cards } = Astro.props;
+---
+
+<div class="space-y-6">
+  {cards.map(card => (
+    <Card tight class="bg-white text-ln-dark">
+      <div class="flex items-start gap-4">
+        <!-- Ikon i farvet cirkel -->
+        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-ln-accent flex items-center justify-center">
+          <Icon name={card.icon} class="w-6 h-6 text-white" />
+        </div>
+        <!-- Titel + beskrivelse -->
+        <div>
+          <h3 class="text-lg font-semibold">{card.title}</h3>
+          <p class="text-body-sm text-ln-dark">{card.body}</p>
+        </div>
+      </div>
+    </Card>
+  ))}
+</div>

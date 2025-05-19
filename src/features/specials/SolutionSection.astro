@@ -1,33 +1,39 @@
 ---
 // src/features/specials/SolutionSection.astro
 import Button from '@components/Button.astro';
-import NumberedCards from './NumberedCards.astro';
+import Card from '@components/Card.astro';
+import InfoCards from './InfoCards.astro';
 import type { Solution } from './solutions.data';
 
 export interface Props {
   solution: Solution;
-  /** the 0-based index decides left/right alternation */
   index: number;
 }
 
 const { solution, index } = Astro.props;
-const reversed = index % 2 === 1; // every second block is flipped
+const reversed = index % 2 === 1;
 ---
 
 <section id={solution.id} class="py-section px-gutter bg-ln-light">
   <div
     class={
       `max-w-7xl mx-auto grid gap-16
-       lg:grid-cols-[minmax(0,45%)_minmax(320px,55%)] lg:items-center ` +
+       lg:grid-cols-[minmax(0,55%)_minmax(320px,45%)] lg:items-center ` +
       (reversed ? 'lg:[&>*:first-child]:order-2' : '')
     }>
-
-    <!-- ─────── Text + Media column ──────────────────────────── -->
-    <div class="space-y-6">
+    
+    <!-- Text + Media -->
+    <Card tight class="space-y-6 relative z-10">
       <h2 class="text-heading-lg font-extrabold leading-tight text-ln-dark">
         {solution.title}
       </h2>
-      <p class="text-body text-ln-dark">{solution.body}</p>
+
+      {solution.body
+        .trim()
+        .split(/\n{2,}/)
+        .map(paragraph => (
+          <p class="text-body text-ln-dark" set:html={paragraph.replace(/\n/g, '<br />')} />
+        ))}
 
       {solution.media.type === 'image' && (
         <img
@@ -36,7 +42,6 @@ const reversed = index % 2 === 1; // every second block is flipped
           class="rounded-2xl shadow-xl w-full h-auto"
         />
       )}
-
       {solution.media.type === 'video' && (
         <video
           src={solution.media.src}
@@ -45,11 +50,15 @@ const reversed = index % 2 === 1; // every second block is flipped
           class="rounded-2xl shadow-xl w-full h-auto"
         />
       )}
+      <Button href="#kontakt" variant="primary" size="sm">Kontakt os</Button>
+    </Card>
 
-      <Button href="#kontakt" variant="primary">Kontakt os</Button>
+    <!-- Cards column -->
+    <div class="relative">
+      <div class={`absolute inset-0 bg-ln-dark rounded-2xl lg:rounded-none lg:-m-8 ${reversed ? 'lg:-mr-24' : 'lg:-ml-24'}`}></div>
+      <div class="relative z-10">
+        <InfoCards cards={solution.cards} />
+      </div>
     </div>
-
-    <!-- ─────── Numbered cards column ─────────────────────────── -->
-    <NumberedCards cards={solution.cards} />
   </div>
-</section> 
+</section>
