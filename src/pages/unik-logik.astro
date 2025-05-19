@@ -6,13 +6,19 @@ import SolutionSection from '@features/specials/SolutionSection.astro';
 import { SOLUTIONS } from '@features/specials/solutions.data';
 import TrustSection from '@features/trust/TrustSection.astro';
 import ContactSection from '@features/contact/ContactSection.astro';
+import SpecialIntermezzo from '@features/specials/SpecialIntermezzo.astro';
 ---
 
 <BaseLayout title="Unik logik – LogicNodes">
   <SpecialHero />
 
-  {SOLUTIONS.map((s, i) => (
-    <SolutionSection solution={s} index={i} />
+  {SOLUTIONS.map((solution, i) => (
+    <>
+      <SolutionSection solution={solution} index={i} />
+  
+      {/* Indsæt CTA-sektionen efter special #2 — juster index efter behov */}
+      {i === 1 && <SpecialIntermezzo />}
+    </>
   ))}
 
   <TrustSection />

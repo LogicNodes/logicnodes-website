@@ -1,0 +1,47 @@
+---
+// src/features/specials/SpecialIntermezzo.astro
+// En fuldbredde-sektion med baggrundsbillede + mørk overlay
+import Button from '@components/Button.astro';
+
+export interface Props {
+  /** Hvis du vil linke direkte til sektionen */
+  id?: string;
+  /** Valgfrit: udskift baggrundsbillede */
+  bgSrc?: string;
+}
+
+const {
+  id    = 'special-intermezzo',
+  bgSrc = '/images/special-intermezzo.jpg',
+} = Astro.props;
+---
+
+<section id={id} class="my-section px-gutter">
+  <div class="relative max-w-7xl mx-auto rounded-2xl overflow-hidden">
+    <!-- Baggrundsbillede -->
+    <img
+      src={bgSrc}
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="lazy"
+    />
+
+    <!-- Mørk overlay -->
+    <div class="absolute inset-0 bg-black/60"></div>
+
+    <!-- Indhold -->
+    <div class="relative z-10 py-20 px-6 md:px-16 text-center text-white space-y-6">
+      <h2 class="text-heading-lg font-extrabold">
+        Har I brug for en unik løsning?
+      </h2>
+
+      <p class="max-w-3xl mx-auto text-body">
+        LogicNodes kan hjælpe med at udvikle og implementere unikke løsninger, til lige netop den udfordring, I står overfor. <br><br>
+        Kontakt os i dag, og få afdækket mulighederne for at gøre I jeres virksomhed bedre, med AI.
+      </p>
+      <Button href="#kontakt" variant="primary" className="flex-1">
+        Kontakt os
+      </Button>
+    </div>
+  </div>
+</section>
