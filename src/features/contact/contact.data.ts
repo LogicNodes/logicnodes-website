@@ -7,5 +7,5 @@ export const EMAIL_JS = {
 export const CONTACT_INFO = {
   email: 'kontakt@logicnodes.ai',
   phone: '+45 40 90 62 13',
-  address: 'Slet Møllevej 20, 8310 Tranbjerg, Aarhus',
+  address: 'Sletvej 2D, 8310 Tranbjerg, Aarhus',
 }; 

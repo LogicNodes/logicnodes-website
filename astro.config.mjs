@@ -3,11 +3,15 @@
 import { defineConfig }  from 'astro/config';
 import tailwind          from '@astrojs/tailwind';
 import react             from '@astrojs/react';
+import sitemap           from '@astrojs/sitemap';
 import svgr              from 'vite-plugin-svgr';
 import { fileURLToPath } from 'url';
 
 export default defineConfig({
-  integrations: [tailwind(), react()],
+  // MUST be your public, canonical URL
+  site: 'https://logicnodes.ai',
+  integrations: [tailwind(), react(),
+                 sitemap()],
   vite: {
     plugins: [svgr()],
     resolve: {
