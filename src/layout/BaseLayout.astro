@@ -5,6 +5,7 @@ import Footer from './Footer.astro';
 import Navbar from './Navbar.astro';
 import faviconSvg from '@assets/logos/favicon.svg?url';
 import { SEO } from 'astro-seo';
+import { GoogleFontsOptimizer } from 'astro-google-fonts-optimizer';
 
 // Default site-wide metadata
 const {
@@ -79,7 +80,7 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={faviconSvg} />
-    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <GoogleFontsOptimizer url="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap" />
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
   </head>
   <body class="bg-ln-light text-ln-dark">

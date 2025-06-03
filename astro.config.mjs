@@ -14,6 +14,9 @@ export default defineConfig({
                  sitemap()],
   vite: {
     plugins: [svgr()],
+    build: {
+      target: 'es2022',
+    },
     resolve: {
       alias: {
         '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
