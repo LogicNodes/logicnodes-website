@@ -46,21 +46,32 @@ function computeActiveLinks(
 
 /* ---------------------------- component ---------------------------- */
 export default function NeuralGraphSVG({
-  width = 700, 
-  height = 350
-}: { 
-  width?: number, 
-  height?: number 
-}) {
+}: {}) {
   const ref     = useRef<HTMLDivElement>(null);
   const cvsRef  = useRef<HTMLCanvasElement>(null);
 
-  const size = { w: width, h: height };
+  const [size, setSize] = useState({ w: 700, h: 350 });
   const [hover, setHover] = useState<Hover>(undefined);
   const [tooltip, setTooltip] = useState<null | {
     node: typeof NODES[number];
     x: number; y: number; tx: string; ty: string;
   }>(null);
+
+  /* Re-measure whenever the wrapper changes ----------------------- */
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    function measure() {
+      if (!el) return;
+      const w = el.clientWidth;
+      /* keep original aspect ratio (1000 : 700 = 1 : 0.7) */
+      setSize({ w, h: w * 0.7 });
+    }
+    measure();                              // initial
+    const ro = new ResizeObserver(measure); // and on resize
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   /* node positions in **pixels** for the current box ---------------- */
   const nodesPx = useMemo(() => NODES.map(n => ({

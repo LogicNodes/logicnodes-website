@@ -5,7 +5,7 @@ import Button from '@components/Button.astro';
 import Card from '@components/Card.astro';
 ---
 <!-- needs room for a much wider SVG: allow x-overflow, keep y-hidden -->
-<section class="bg-ln-light py-[4rem] overflow-x-visible overflow-y-visible px-gutter">
+<section class="bg-ln-light py-[4rem] overflow-x-clip overflow-y-visible px-gutter">
   <!-- Grid: 1 column on mobile, 2 columns ≥lg -->
   <div
     class="max-w-7xl mx-auto grid gap-16
@@ -33,8 +33,14 @@ import Card from '@components/Card.astro';
     <!-- ── Column 2 · Neural graph ──────────────────────────────────
          * Contains the neural graph visualization
          * Properly sized to fit the right column                     -->
-    <div class="relative h-[700px] w-[1000px] -mx-[5vw] xl:-mx-[15vw] lg:block hidden translate-x-[25%]">
-      <NeuralGraph width={1000} height={700} client:only="react" />
+    <!-- Fluid "stage" that always keeps a 1000 : 700 aspect-ratio   -->
+    <div
+      class="relative lg:block hidden
+             w-[min(1000px,90vw)]           /* grow until 1 200 px   */
+             aspect-[1000/700]              /* keep the ratio       */
+             -mx-[5vw] xl:-mx-[15vw]        /* offset like before   */
+             translate-x-[25%]">
+      <NeuralGraph client:only="react" />   <!-- width comes from JS -->
     </div>
   </div>
 
