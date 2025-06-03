@@ -19,10 +19,10 @@ import reportIcon     from '@assets/icons/graph/report.svg?url'
 import { COLORS } from '@lib/colors'
 
 /* ------------------------------------------------------------------ *
- *  New: normalised coordinates for responsive <svg>                  *
+ *  Base dimensions for reference size calculation                     *
  * ------------------------------------------------------------------ */
-export const BASE_W = 700;
-export const BASE_H = 350;
+export const BASE_W = 1000;
+export const BASE_H = 700;
 
 export type GraphNode = {
     id: string
@@ -47,10 +47,10 @@ export type GraphNode = {
     accent: COLORS.accent,
   }
   
-  export const SIZE = {
-    r: 32,
-    rHover: 40,
-    pulse: 3,
+  export const DESIGN_SIZE = {
+    node: 32,
+    nodeHover: 40,
+    pulse: 3,   // width (= height) of the travelling rectangle
     stroke: 2,
   }
   

@@ -5,7 +5,7 @@ import React, {
 import type { MouseEvent } from 'react';
 
 import {
-  NODES, LINKS, ICONS, GRAPH_COLORS, SIZE
+  BASE_W, BASE_H, NODES, LINKS, ICONS, GRAPH_COLORS, DESIGN_SIZE
 } from './graph.data';
 import { COLORS } from '@lib/colors';
 
@@ -45,37 +45,48 @@ function computeActiveLinks(
 }
 
 /* ---------------------------- component ---------------------------- */
-export default function NeuralGraphSVG({
-}: {}) {
-  const ref     = useRef<HTMLDivElement>(null);
-  const cvsRef  = useRef<HTMLCanvasElement>(null);
+export default function NeuralGraphSVG() {
+  const ref    = useRef<HTMLDivElement>(null);
+  const cvsRef = useRef<HTMLCanvasElement>(null);
+  
+  /* --------------------------------------------------------------- *
+   *  1.  Track the wrapper's real pixel box                         *
+   *  2.  Turn that into ONE scale factor                            *
+   * --------------------------------------------------------------- */
+  const [{ w, h }, setBox] = useState({ w: BASE_W, h: BASE_H });
+  
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const ro = new ResizeObserver(() => {
+      const { width, height } = el.getBoundingClientRect();
+      setBox({ w: width, h: height });
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  
+  /* Single scale factor based on wrapper width */
+  const scale = w / BASE_W;
+  
+  /*  Every design-pixel gets multiplied once ---------------------- */
+  const S = useMemo(() => ({
+    r:        DESIGN_SIZE.node      * scale,
+    rHover:   DESIGN_SIZE.nodeHover * scale,
+    stroke:   DESIGN_SIZE.stroke    * scale,
+    pulseW:   DESIGN_SIZE.node      * scale * 0.94,   // ≈ old 30 px at design size
+    pulseH:   DESIGN_SIZE.stroke    * scale * 2,      // ≈ old 4 px at design size
+  }), [scale]);
 
-  const [size, setSize] = useState({ w: 700, h: 350 });
-  const [hover, setHover] = useState<Hover>(undefined);
+  const [hover, setHover] = useState<string | undefined>(undefined);
   const [tooltip, setTooltip] = useState<null | {
     node: typeof NODES[number];
     x: number; y: number; tx: string; ty: string;
   }>(null);
 
-  /* Re-measure whenever the wrapper changes ----------------------- */
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    function measure() {
-      if (!el) return;
-      const { width: w, height: h } = el.getBoundingClientRect();
-      setSize({ w, h });
-    }
-    measure();                              // initial
-    const ro = new ResizeObserver(measure); // and on resize
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  /* node positions in **pixels** for the current box ---------------- */
+  /* node positions in **pixels** for the current box ------------- */
   const nodesPx = useMemo(() => NODES.map(n => ({
-    ...n, px: n.u * size.w, py: n.v * size.h,
-  })), [size]);
+    ...n, px: n.u * w, py: n.v * h,
+  })), [w, h]);
 
   const posMap = useMemo(() =>
     new Map(nodesPx.map(n => [n.id, { x: n.px, y: n.py }])),
@@ -117,8 +128,8 @@ export default function NeuralGraphSVG({
    * ----------------------------------------------------------------- */
   useEffect(() => {
     const canvas = cvsRef.current; if (!canvas) return;
-    canvas.width  = size.w;
-    canvas.height = size.h;
+    canvas.width  = w;
+    canvas.height = h;
     const ctx = canvas.getContext('2d')!;
 
     let raf = 0, t0 = performance.now();
@@ -144,7 +155,7 @@ export default function NeuralGraphSVG({
           ctx.translate(x,y); ctx.rotate(angle);
           ctx.fillStyle = GRAPH_COLORS.accent;
           ctx.globalAlpha = 0.8;
-          ctx.fillRect(-15,-2,30,4);
+          ctx.fillRect(-S.pulseW/2, -S.pulseH/2, S.pulseW, S.pulseH);
           ctx.restore();
         }
       });
@@ -153,7 +164,7 @@ export default function NeuralGraphSVG({
     };
     raf = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(raf);
-  }, [size, timings, posMap]);
+  }, [w, h, timings, posMap, S]);
 
   /* preload images once --------------------------------------------- */
   const iconImg = useMemo(() => {
@@ -176,7 +187,7 @@ export default function NeuralGraphSVG({
     
     // Only adjust horizontal positioning, keep it above the node
     if (x < PAD + W/2)               tx = '0';
-    if (x > size.w - PAD - W/2)      tx = '-100%';
+    if (x > w - PAD - W/2)      tx = '-100%';
     
     // Special case for rightmost nodes (u=1) - position above and to the left
     if (node.u >= 0.75) {             // Using 0.95 to catch nodes with u=1
@@ -188,10 +199,14 @@ export default function NeuralGraphSVG({
   const hideTooltip = () => setTooltip(null);
 
   return (
-    <div ref={ref} className="relative w-full h-full select-none">
+    <div 
+      ref={ref} 
+      className="relative w-full h-full select-none" 
+      data-component="neural-graph"
+    >
       {/* ---------- layer 0 : edges ---------- */}
       <svg
-        viewBox={`0 0 ${size.w} ${size.h}`}
+        viewBox={`0 0 ${w} ${h}`}
         width="100%" height="100%"
         className="absolute inset-0 z-0 pointer-events-none"
         overflow="visible"
@@ -219,13 +234,13 @@ export default function NeuralGraphSVG({
 
       {/* ---------- layer 2 : nodes ---------- */}
       <svg
-        viewBox={`0 0 ${size.w} ${size.h}`}
+        viewBox={`0 0 ${w} ${h}`}
         width="100%" height="100%"
         className="absolute inset-0 z-20"
         overflow="visible"
       >
         {nodesPx.map(n => {
-          const r = hover===n.id ? SIZE.rHover : SIZE.r;
+          const r = hover===n.id ? S.rHover : S.r;
           return (
             <g
               key={n.id}
@@ -238,7 +253,7 @@ export default function NeuralGraphSVG({
                 r={r}
                 fill={GRAPH_COLORS.node}
                 stroke={hover===n.id ? GRAPH_COLORS.accent : 'none'}
-                strokeWidth={SIZE.stroke}
+                strokeWidth={S.stroke}
                 filter="url(#ds)"
               />
               {n.icon && (
