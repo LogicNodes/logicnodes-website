@@ -7,29 +7,64 @@ import { JOBS } from './jobs.data';
 <section id="jobopslag" class="bg-ln-light py-section px-gutter">
   <div class="max-w-7xl mx-auto grid gap-8 sm:grid-cols-2">
     {JOBS.map(job => (
-      <Card tight class="bg-white text-ln-dark flex flex-col">
-        {/* kategori badge */}
-        <span class="bg-ln-accent text-white text-xs font-semibold px-3 py-1 rounded-full mb-2 self-start">
-          {job.category}
-        </span>
+      <>
+        <Card tight class="bg-white text-ln-dark flex flex-col">
+          {/* kategori badge */}
+          <span class="bg-ln-accent text-white text-xs font-semibold px-3 py-1 rounded-full mb-2 self-start">
+            {job.category}
+          </span>
 
-        {/* titel */}
-        <h2 class="text-heading-md font-bold mb-2">{job.title}</h2>
+          {/* titel */}
+          <h2 class="text-heading-md font-bold mb-2">{job.title}</h2>
 
-        {/* beskrivelse */}
-        <div class="text-body mb-6 space-y-4">
-          {job.description.trim().split(/\n{2,}/).map(block => (
-            <p set:html={block.replace(/\n/g, '<br />')} />
-          ))}
-        </div>
+          {/* beskrivelse */}
+          <div class="text-body mb-6 space-y-4">
+            {job.description.trim().split(/\n{2,}/).map(block => (
+              <p set:html={block.replace(/\n/g, '<br />')} />
+            ))}
+          </div>
 
-        {/* spacer + knap */}
-        <div class="mt-auto pt-2">
-          <Button href="#kontakt" size="sm" variant="primary" className="w-full">
-            Ansøg nu
-          </Button>
-        </div>
-      </Card>
+          {/* spacer + knap */}
+          <div class="mt-auto pt-2">
+            <Button href="#kontakt" size="sm" variant="primary" className="w-full">
+              Ansøg nu
+            </Button>
+          </div>
+        </Card>
+
+        <!-- JSON-LD for JobPosting -->
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "JobPosting",
+            "title": job.title,
+            "description": job.description.replace(/\n/g, ' '),
+            "identifier": {
+              "@type": "PropertyValue",
+              "name": "LogicNodes",
+              "value": job.id
+            },
+            "datePosted": "2024-06-01",
+            "employmentType": "PART_TIME",
+            "hiringOrganization": {
+              "@type": "Organization",
+              "name": "LogicNodes",
+              "sameAs": "https://logicnodes.ai",
+              "logo": "https://logicnodes.ai/favicon.svg"
+            },
+            "jobLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Sletvej 2D",
+                "addressLocality": "Tranbjerg",
+                "postalCode": "8310",
+                "addressCountry": "DK"
+              }
+            }
+          })}
+        </script>
+      </>
     ))}
   </div>
 </section>

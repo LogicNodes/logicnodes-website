@@ -41,6 +41,41 @@ const {
         creator: "@logicnodes"
       }}
     />
+    <!-- Global structured data for LogicNodes -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "LogicNodes",
+            "url": "https://logicnodes.ai",
+            "logo": "https://logicnodes.ai/favicon.svg",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+45-40-90-62-13",
+              "contactType": "Customer Support",
+              "email": "kontakt@logicnodes.ai",
+              "areaServed": "DK",
+              "availableLanguage": ["Danish", "English"]
+            },
+            "sameAs": [
+              "https://www.linkedin.com/company/logicnodesai"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "LogicNodes",
+            "url": "https://logicnodes.ai",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://logicnodes.ai/?s={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          }
+        ]
+      }
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={faviconSvg} />
