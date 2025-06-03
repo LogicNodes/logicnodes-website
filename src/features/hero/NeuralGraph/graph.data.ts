@@ -18,10 +18,16 @@ import syncIcon       from '@assets/icons/graph/sync.svg?url'
 import reportIcon     from '@assets/icons/graph/report.svg?url'
 import { COLORS } from '@lib/colors'
 
+/* ------------------------------------------------------------------ *
+ *  New: normalised coordinates for responsive <svg>                  *
+ * ------------------------------------------------------------------ */
+export const BASE_W = 700;
+export const BASE_H = 350;
+
 export type GraphNode = {
     id: string
-    x: number
-    y: number
+    u: number
+    v: number
     icon?: keyof typeof ICONS
     info?: {
       title: string
@@ -42,8 +48,8 @@ export type GraphNode = {
   }
   
   export const SIZE = {
-    r: 16,
-    rHover: 20,
+    r: 32,
+    rHover: 40,
     pulse: 3,
     stroke: 2,
   }
@@ -71,7 +77,7 @@ export type GraphNode = {
   export const NODES: GraphNode[] = [
     // ─── Lag 0: Indgangspunkt ───
     {
-      id: 'root', x: 80, y: 200, icon: 'logicnodes',
+      id: 'root', u: 0.025, v: 0.5, icon: 'logicnodes',
       info: {
         title: 'LogicNodes',
         text: 'LogicNodes hjælper dig med at orkestrere og automatisere AI-processer.'
@@ -80,21 +86,21 @@ export type GraphNode = {
   
     // ─── Lag 1: Inputkilder ───
     {
-      id: 'a', x: 180, y: 100, icon: 'email',
+      id: 'a', u: 0.2, v: 0.25, icon: 'email',
       info: {
         title: 'Email',
         text: 'Lad AI læse og reagere intelligent på indkommende mails'
       }
     },
     {
-      id: 'b', x: 180, y: 200, icon: 'ear',
+      id: 'b', u: 0.2, v: 0.5, icon: 'ear',
       info: {
         title: 'Lytte',
         text: 'Transskriber møder og lad AI tage handling baseret på indholdet'
       }
     },
     {
-      id: 'c', x: 180, y: 300, icon: 'graduation',
+      id: 'c', u: 0.2, v: 0.75, icon: 'graduation',
       info: {
         title: 'Viden',
         text: 'Byg AI-agenter med ekspertviden om lovgivning og regler inden for din branche'
@@ -103,28 +109,28 @@ export type GraphNode = {
   
     // ─── Lag 2: Databehandling ───
     {
-      id: 'd1', x: 280, y: 70, icon: 'image',
+      id: 'd1', u: 0.4, v: 0.1, icon: 'image',
       info: {
         title: 'Billeder',
         text: 'Udtræk og analyser information fra billeder og visuelle dokumenter'
       }
     },
     {
-      id: 'd2', x: 280, y: 160, icon: 'folder',
+      id: 'd2', u: 0.4, v: 0.375, icon: 'folder',
       info: {
         title: 'Dokumenter',
         text: 'Læs, forstå og konkludér ud fra interne dokumenter og mapper'
       }
     },
     {
-      id: 'd3', x: 280, y: 240, icon: 'gear',
+      id: 'd3', u: 0.4, v: 0.625, icon: 'gear',
       info: {
         title: 'Automatisering',
         text: 'Automatisér gentagne manuelle opgaver, så medarbejderne kan fokusere på mere værdiskabende arbejde'
       }
     },
     {
-      id: 'd4', x: 280, y: 330, icon: 'workflow',
+      id: 'd4', u: 0.4, v: 0.9, icon: 'workflow',
       info: {
         title: 'Arbejdsgange',
         text: 'Kombinér flere AI-agenter i en sammenhængende arbejdsgang'
@@ -133,28 +139,28 @@ export type GraphNode = {
   
     // ─── Lag 3: Analyse og beslutning ───
     {
-      id: 'e1', x: 380, y: 70, icon: 'search',
+      id: 'e1', u: 0.6, v: 0.1, icon: 'search',
       info: {
         title: 'Berigelse',
         text: 'Berig eksisterende data med information fra eksterne kilder og data'
       }
     },
     {
-      id: 'e2', x: 380, y: 160, icon: 'sync',
+      id: 'e2', u: 0.6, v: 0.375, icon: 'sync',
       info: {
         title: 'Synkronisering',
         text: 'Opdatér dine interne systemer med ny og relevant information'
       }
     },
     {
-      id: 'e3', x: 380, y: 240, icon: 'decisions',
+      id: 'e3', u: 0.6, v: 0.625, icon: 'decisions',
       info: {
         title: 'Beslutninger',
         text: 'Lad AI træffe intelligente beslutninger på baggrund af data og kontekst'
       }
     },
     {
-      id: 'e4', x: 380, y: 330, icon: 'person',
+      id: 'e4', u: 0.6, v: 0.9, icon: 'person',
       info: {
         title: 'Tilsyn',
         text: 'Indbyg menneskelig kontrol, så AI-beslutninger kan godkendes manuelt'
@@ -163,28 +169,28 @@ export type GraphNode = {
   
     // ─── Lag 4: Handling ───
     {
-      id: 'f1', x: 480, y: 70, icon: 'send',
+      id: 'f1', u: 0.8, v: 0.1, icon: 'send',
       info: {
         title: 'Send',
         text: 'Send e-mails eller beskeder automatisk fra AI-agenten'
       }
     },
     {
-      id: 'f2', x: 480, y: 160, icon: 'action',
+      id: 'f2', u: 0.8, v: 0.375, icon: 'action',
       info: {
         title: 'Handling',
         text: 'Udløs eksterne handlinger i andre systemer, f.eks. CRM, ERP eller API-kald'
       }
     },
     {
-      id: 'f3', x: 480, y: 240, icon: 'notify',
+      id: 'f3', u: 0.8, v: 0.625, icon: 'notify',
       info: {
         title: 'Notifikation',
         text: 'Send alarmer, påmindelser eller daglige opdateringer til brugerne'
       }
     },
     {
-      id: 'f4', x: 480, y: 330, icon: 'report',
+      id: 'f4', u: 0.8, v: 0.9, icon: 'report',
       info: {
         title: 'Rapport',
         text: 'Generér konklusioner, opsummeringer eller eksportér data i rapportform'
@@ -192,11 +198,11 @@ export type GraphNode = {
     },  
   
     // ─── Layer 5: Output ───
-    { id: 'g1', x: 580, y: 70 },
-    { id: 'g2', x: 580, y: 160 },
-    { id: 'g3', x: 580, y: 240 },
-    { id: 'g4', x: 580, y: 330 },
-  ]  
+    { id: 'g1', u: 1, v: 0.1 },
+    { id: 'g2', u: 1, v: 0.375 },
+    { id: 'g3', u: 1, v: 0.625 },
+    { id: 'g4', u: 1, v: 0.9 },
+  ]
   
   export const LINKS: GraphLink[] = [
     { from: 'root', to: 'a' },

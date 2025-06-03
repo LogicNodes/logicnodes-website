@@ -1,14 +1,15 @@
 ---
 import Icon from '@lib/Icon.astro';
-import NeuralGraph from './NeuralGraph/NeuralGraph.tsx';
+import NeuralGraph from './NeuralGraph/NeuralGraphSVG.tsx';
 import Button from '@components/Button.astro';
 import Card from '@components/Card.astro';
 ---
-<section class="bg-ln-light py-section overflow-hidden px-gutter">
+<!-- needs room for a much wider SVG: allow x-overflow, keep y-hidden -->
+<section class="bg-ln-light py-[4rem] overflow-x-visible overflow-y-visible px-gutter">
   <!-- Grid: 1 column on mobile, 2 columns ≥lg -->
   <div
     class="max-w-7xl mx-auto grid gap-16
-           lg:grid-cols-[minmax(0,45%)_minmax(320px,55%)] lg:items-center">
+           lg:grid-cols-[minmax(0,50%)_1fr] lg:items-center">
            
     <!-- ── Column 1 ───────────── -->
     <div class="space-y-6 text-ln-dark">
@@ -29,19 +30,11 @@ import Card from '@components/Card.astro';
       </div>      
     </div>
 
-    <!-- ── Column 2 (graph) ───── -->
-    <div
-      class="relative h-[550px]
-                 pointer-events-none
-                 overflow-visible
-                 isolate
-                 -mr-[calc(55vw-55%)]
-                 hidden lg:block">
-
-      <!-- restore pointer events only to the canvas -->
-      <div class="pointer-events-auto w-full h-full">
-        <NeuralGraph client:only="react" />
-      </div>
+    <!-- ── Column 2 · Neural graph ──────────────────────────────────
+         * Contains the neural graph visualization
+         * Properly sized to fit the right column                     -->
+    <div class="relative h-[700px] w-[1000px] -mx-[5vw] xl:-mx-[15vw] lg:block hidden translate-x-[25%]">
+      <NeuralGraph width={1000} height={700} client:only="react" />
     </div>
   </div>
 
