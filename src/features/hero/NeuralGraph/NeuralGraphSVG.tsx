@@ -63,9 +63,8 @@ export default function NeuralGraphSVG({
     if (!el) return;
     function measure() {
       if (!el) return;
-      const w = el.clientWidth;
-      /* keep original aspect ratio (1000 : 700 = 1 : 0.7) */
-      setSize({ w, h: w * 0.7 });
+      const { width: w, height: h } = el.getBoundingClientRect();
+      setSize({ w, h });
     }
     measure();                              // initial
     const ro = new ResizeObserver(measure); // and on resize

@@ -33,11 +33,15 @@ import Card from '@components/Card.astro';
     <!-- ── Column 2 · Neural graph ──────────────────────────────────
          * Contains the neural graph visualization
          * Properly sized to fit the right column                     -->
-    <!-- Fluid "stage" that always keeps a 1000 : 700 aspect-ratio   -->
+    <!-- Fluid "stage" that always keeps a responsive aspect-ratio based on breakpoints -->
     <div
       class="relative lg:block hidden
-             w-[min(1000px,90vw)]           /* grow until 1 200 px   */
-             aspect-[1000/700]              /* keep the ratio       */
+             w-[min(1000px,90vw)]
+             aspect-[1/1]                       /* < 768 px  : square   */
+             sm:aspect-[1000/900]               /* 768-1023 px : 1 : 0.90 */
+             lg:aspect-[1000/800]               /* 1024-1279 px: 1 : 0.80 */
+             xl:aspect-[1000/700]               /* 1280-1535 px: 1 : 0.70 */
+             2xl:aspect-[1000/650]              /* ≥ 1536 px  : 1 : 0.65 */
              -mx-[5vw] xl:-mx-[15vw]        /* offset like before   */
              translate-x-[25%]">
       <NeuralGraph client:only="react" />   <!-- width comes from JS -->
