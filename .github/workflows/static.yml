@@ -31,6 +31,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v3
         with:
@@ -45,9 +53,9 @@ jobs:
             /*.js
               Cache-Control: public, max-age=31536000, immutable
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v1
         with:
-          # Upload entire repository
+          # Upload the dist directory which contains the built site
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
