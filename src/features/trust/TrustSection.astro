@@ -1,34 +1,85 @@
 ---
-/*
-  Trust section - social proof only (testimonials + logo ticker)
-*/
 import { Image } from 'astro:assets';
-import { TESTIMONIALS } from './testimonials.data';
 import { LOGOS } from './logos.data';
+
+interface VideoCase {
+  src: string;
+  label: string;
+  heading: string;
+  quote: string;
+  name: string;
+  role: string;
+  flip?: boolean;
+  poster?: string; // optional placeholder image before play
+}
+
+const VIDEO_CASES: VideoCase[] = [
+  {
+    src: 'https://logicnodes-cdn.b-cdn.net/Case%20Mercura.mp4',
+    poster: '/images/mercura-poster.png', // <— replace with actual placeholder path
+    label: 'MØD MARTIN FRA MERCURA',
+    heading: 'Hør hvordan Mercura gik fra skeptisk til "taget med storm"',
+    quote: 'Alle har være præget af en lille smule skepsis, men vi er faktisk nået lang længere end vi turde håbe på.',
+    name: 'Martin Johansen',
+    role: 'Founder, Mercura',
+  },
+  {
+    src: 'https://logicnodes-cdn.b-cdn.net/Case%20R%26M%20_%20Smart%20CSRD.mp4',
+    poster: '/images/scsrd-poster.png',
+    label: 'MØD CARSTEN FRA RAUNDAHL & MOESBY',
+    heading: 'Hør hvordan LogicNodes gjorde CSRD-processen overskuelig for Raundahl & Moesby',
+    quote:
+      'Vi har været i fuld kontrol over løsningen, og så har vi måske sparet et eller andet sted mellem 250.000 og 500.000 kr.',
+    name: 'Carsten Raundahl',
+    role: 'CEO, Raundahl & Moesby',
+    flip: true,
+  },
+];
 ---
 <section id="trust" class="bg-ln-light py-section px-gutter">
   <div class="max-w-7xl mx-auto space-y-16">
-    <!-- Testimonials -->
-    <div>
-      <h2 class="text-heading-lg font-extrabold text-ln-dark mb-10 text-center">
-        Hvad siger kunderne?
-      </h2>
+    <h2 class="text-heading-lg font-extrabold text-ln-dark mb-10 text-center">
+      Hvad siger kunderne?
+    </h2>
 
-      <div class="grid gap-8 md:grid-cols-3">
-        {TESTIMONIALS.map(t => (
-          <blockquote class="bg-white p-8 rounded-2xl shadow-xl space-y-4">
-            <p class="text-body leading-relaxed text-ln-dark">&ldquo;{t.quote}&rdquo;</p>
+    <!-- Video cases -->
+    <div class="space-y-16">
+      {VIDEO_CASES.map((c) => (
+        <div
+          class={`flex flex-col ${c.flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 bg-white rounded-2xl shadow-xl overflow-hidden`}
+        >
+          <!-- Video -->
+          <div class="md:w-[55%] w-full">
+            <video
+              controls
+              playsinline
+              preload="none"
+              poster={c.poster ?? '/placeholders/default.jpg'}
+              class="w-full h-full object-cover"
+            >
+              <source src={c.src} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <!-- Text content -->
+          <div class="p-8 md:w-[45%] space-y-6">
+            <span class="uppercase tracking-wider text-sm font-semibold text-ln-accent">{c.label}</span>
+            <h3 class="text-heading-md font-bold text-ln-dark">{c.heading}</h3>
+
+            <div class="flex items-start gap-4">
+              <span class="text-6xl leading-none text-ln-accent">&ldquo;</span>
+              <p class="text-body leading-relaxed text-ln-dark">{c.quote}</p>
+            </div>
+
             <footer class="text-sm font-semibold text-ln-dark/80">
-              {t.avatar && (
-                <Image src={t.avatar} alt="" class="inline mr-2 w-6 h-6 rounded-full" width={24} height={24} />
-              )}
-              {t.name}
+              {c.name}
               <br />
-              <span class="font-normal">{t.role}</span>
+              <span class="font-normal">{c.role}</span>
             </footer>
-          </blockquote>
-        ))}
-      </div>
+          </div>
+        </div>
+      ))}
     </div>
 
     <!-- Logo Slider -->
@@ -37,7 +88,7 @@ import { LOGOS } from './logos.data';
       <div class="absolute left-0 top-0 h-full w-24 z-10 bg-gradient-to-r from-ln-light to-transparent pointer-events-none"></div>
 
       <div class="flex gap-16 animate-scroll w-max">
-        {[...LOGOS, ...LOGOS].map((l, i) => (
+        {[...LOGOS, ...LOGOS].map((l) => (
           <div class="flex items-center justify-center w-[140px] sm:w-[180px] h-16">
             <Image
               src={l.src}
@@ -58,14 +109,23 @@ import { LOGOS } from './logos.data';
 
   <style is:global>
     @keyframes scroll {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
     .animate-scroll {
       animation: scroll 60s linear infinite;
       will-change: transform;
     }
-    .scrollbar-none::-webkit-scrollbar { display: none; }
-    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
   </style>
 </section>

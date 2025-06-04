@@ -21,8 +21,7 @@ export type Solution = {
 const platformImg = '/images/platform-image.png';
 const virkImg = '/images/virk-image.png';
 const rackImg = '/images/rackbeat-image.png';
-const SCSRDvid = 'https://logicnodes-cdn.b-cdn.net/Case%20R%26M%20_%20Smart%20CSRD.mp4';
-const SCSRDposter = '/images/scsrd-poster.png';
+const SCSRDimg = '/images/scsrd-image.png';
 const serviceImg = '/images/service-image.jpg';
 
 
@@ -80,7 +79,7 @@ Smart CSRD automatiserer hele processen omkring dobbelte væsentlighedsanalyse (
 
 Agenten vurderer og dokumenterer alle CSRD-krav og leverer en godkendelsesklar løsning på ned til 2 uger.
 `,
-    media: { type: 'video', src: SCSRDvid, poster: SCSRDposter },
+    media: { type: 'image', src: SCSRDimg, alt: 'Skærmbillede af Smart CSRD' },
     cards: [
       { icon: 'chart', title: 'AI-drevet analyse', body: 'Gennemgår og vurderer alle 1.100 CSRD-datapunkter objektivt.' },
       { icon: 'sliders', title: 'Fuld kontrol, minimal indsats', body: 'Ledelsen styrer ambitionsniveauet — resten klares af agenten.' },

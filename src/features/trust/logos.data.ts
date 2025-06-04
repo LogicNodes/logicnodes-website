@@ -7,6 +7,7 @@ import snLogo from '@assets/logos/sn-logo.png';
 import sufLogo from '@assets/logos/suf-logo.png';
 import vindstoedLogo from '@assets/logos/vindstød-logo.png';
 import hommelhoffLogo from '@assets/logos/hommelhoff-logo.png';
+import mercuraLogo from '@assets/logos/mercura-logo.png';
 
 // Define logo interface
 interface Logo {
@@ -21,5 +22,6 @@ export const LOGOS: Logo[] = [
   { src: snLogo, alt: 'Sjællandske Nyheder Logo' },
   { src: sufLogo, alt: 'SUF logo' },
   { src: vindstoedLogo, alt: 'Vindstød Logo' },
-  { src: hommelhoffLogo, alt: 'Hörmelhoff Logo' }
+  { src: hommelhoffLogo, alt: 'Hommelhoff Logo' },
+  { src: mercuraLogo, alt: 'Mercura Logo' },
 ] 
