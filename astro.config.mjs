@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 export default defineConfig({
   // MUST be your public, canonical URL
   site: 'https://logicnodes.ai',
-  trailingSlash: 'always',      // Consistently use trailing slashes
+  trailingSlash: 'never',      // Never use trailing slashes
   integrations: [
     tailwind(),
     react(),

@@ -1,26 +1,27 @@
+// src/features/process/steps.data.ts
+// ------------------------------------------------------------------
+// AI-introforløb – Fra idé til løsning i 4 enkle trin
+// ------------------------------------------------------------------
+
 export const steps = [
   {
     num: 1,
-    title: 'Opstartsmøde',
-    body:
-      `Vi holder et opstartsmøde, hvor I vil blive introduceret til nogle værktøjer, der kan bruges i de fleste virksomheder. Her får I også konkrete forslag til, hvordan I kan begynde at tage dem i brug med det samme. Samtidig tager vi en generel dialog om, hvordan jeres selskab fungerer, så vi i fællesskab kan identificere, hvor AI vil give den største gevinst for jer`,
+    title: 'Opstartsmøde og workshop',
+    body: `Vi starter med et møde, hvor I får en enkel og praktisk introduktion til AI, med fokus på hvordan det kan bruges i jeres hverdag. Derefter holder vi en workshop, hvor vi sammen ser på jeres virksomhed og finder ud af, hvor AI vil give mest mening.`,
   },
   {
     num: 2,
-    title: 'Repræsentantmøder',
-    body:
-      `Når de vigtigste indsatsområder er fundet, holder vi individuelle møder med en repræsentant fra hvert område. Vores AI‑eksperter lærer jeres arbejds­gange at kende og giver konkrete forslag – både til hurtige forbedringer og til ændringer, der kan gavne på længere sigt.`,
+    title: 'Møder med nøglepersoner',
+    body: `Vi taler med medarbejdere fra de vigtigste områder. Her lærer vi deres arbejdsopgaver at kende og finder ud af, hvor AI kan hjælpe – både med at spare tid og gøre arbejdet nemmere.`,
   },
   {
     num: 3,
-    title: 'Implementering',
-    body:
-      `For at gøre AI til en naturlig del af jeres hverdag, tilbyder vi et forløb med den nødvendige viden og støtte. Forløbet vil tage udgangspunkt i jeres daglige arbejds­gange, og sikre at I får yderligere hjælp til udfordringer som de opstår.`,
+    title: 'Forslag til løsninger',
+    body: `I får et katalog med forslag til konkrete AI-løsninger. Hvert forslag forklarer, hvordan det virker, hvad det kræver, og hvor meget tid eller penge det kan spare jer.`,
   },
   {
     num: 4,
-    title: 'Unikke løsninger',
-    body:
-      `Vi tilbyder specialudviklede AI-løsninger, der er skræddersyet til jeres specifikke behov. Uanset om det drejer sig om unikke arbejdsgange, komplekse data eller særlige integrationskrav, udvikler vi løsninger, der passer præcist til jeres virksomhed og mål.`,
+    title: 'Udvikling af løsninger',
+    body: `Når I er klar, bygger vi de løsninger, I har valgt. Vi starter enkelt og bygger videre i takt med jeres behov. Undervejs sørger vi for undervisning, hjælp og tilpasning, så det virker i praksis.`,
   },
-]; 
+];
