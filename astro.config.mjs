@@ -10,8 +10,15 @@ import { fileURLToPath } from 'url';
 export default defineConfig({
   // MUST be your public, canonical URL
   site: 'https://logicnodes.ai',
-  integrations: [tailwind(), react(),
-                 sitemap()],
+  integrations: [
+    tailwind(),
+    react(),
+    sitemap({
+      /* better XML sitemap */
+      lastmod: true,
+      i18n: [{ defaultLocale: 'da', alternate: ['en'] }],
+    }),
+  ],
   vite: {
     plugins: [svgr()],
     build: {

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://logicnodes.ai/sitemap.xml 
+# Point crawlers to the dynamically generated XML sitemap
+Sitemap: https://logicnodes.ai/sitemap-index.xml 

@@ -172,6 +172,8 @@ export default function ServicesGraphic() {
                 y={y - iconSize / 2}
                 preserveAspectRatio="xMidYMid meet"
                 style={{ pointerEvents: 'none' }}
+                aria-hidden="true"
+                role="presentation"
               />
             </g>
           );

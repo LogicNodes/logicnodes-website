@@ -262,6 +262,8 @@ export default function NeuralGraphSVG() {
                   width={r*1.3} height={r*1.3}
                   x={-r*0.65} y={-r*0.65}
                   style={{pointerEvents:'none'}}
+                  aria-hidden="true"
+                  role="presentation"
                 />
               )}
             </g>
