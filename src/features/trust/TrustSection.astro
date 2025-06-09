@@ -62,24 +62,23 @@ const VIDEO_CASES: VideoCase[] = [
             </video>
 
             <!-- Structured data -->
-            <script type="application/ld+json">
-              {JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "VideoObject",
-                "name": c.heading,
-                "description": c.quote,
-                "thumbnailUrl": c.poster ?? "/images/platform-image.png",
-                "contentUrl": c.src,
-                "uploadDate": "2025-06-04",
-                "publisher": {
-                  "@type": "Organization",
-                  "name": "LogicNodes",
-                  "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://logicnodes.ai/logo-square.png"
-                  }
+            <script type="application/ld+json" set:html={JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              "name": c.heading,
+              "description": c.quote,
+              "thumbnailUrl": c.poster ?? "/images/platform-image.png",
+              "contentUrl": c.src,
+              "uploadDate": "2025-06-04",
+              "publisher": {
+                "@type": "Organization",
+                "name": "LogicNodes",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://logicnodes.ai/logo-square.png"
                 }
-              })}
+              }
+            })}>
             </script>
           </div>
 
