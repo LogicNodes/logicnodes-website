@@ -1,24 +1,19 @@
 // astro.config.mjs
 
-import { defineConfig }  from 'astro/config';
-import tailwind          from '@astrojs/tailwind';
-import react             from '@astrojs/react';
-import sitemap           from '@astrojs/sitemap';
-import svgr              from 'vite-plugin-svgr';
+import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
+import svgr from 'vite-plugin-svgr';
 import { fileURLToPath } from 'url';
 
 export default defineConfig({
-  // MUST be your public, canonical URL
   site: 'https://logicnodes.ai',
-  trailingSlash: 'never',      // Never use trailing slashes
+  trailingSlash: 'never',
   integrations: [
     tailwind(),
     react(),
-    sitemap({
-      /* better XML sitemap */
-      lastmod: true,
-      i18n: [{ defaultLocale: 'da', alternate: ['en'] }],
-    }),
+    sitemap(),
   ],
   vite: {
     plugins: [svgr()],
