@@ -33,36 +33,35 @@ import { JOBS } from './jobs.data';
         </Card>
 
         <!-- JSON-LD for JobPosting -->
-        <script is:inline type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "JobPosting",
-            "title": job.title,
-            "description": job.description.replace(/\n/g, ' '),
-            "identifier": {
-              "@type": "PropertyValue",
-              "name": "LogicNodes",
-              "value": job.id
-            },
-            "datePosted": "2024-06-01",
-            "employmentType": "PART_TIME",
-            "hiringOrganization": {
-              "@type": "Organization",
-              "name": "LogicNodes",
-              "sameAs": "https://logicnodes.ai",
-              "logo": "https://logicnodes.ai/favicon.svg"
-            },
-            "jobLocation": {
-              "@type": "Place",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Sletvej 2D",
-                "addressLocality": "Tranbjerg",
-                "postalCode": "8310",
-                "addressCountry": "DK"
-              }
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "JobPosting",
+          "title": job.title,
+          "description": job.description.replace(/\n/g, ' '),
+          "identifier": {
+            "@type": "PropertyValue",
+            "name": "LogicNodes",
+            "value": job.id
+          },
+          "datePosted": "2024-06-01T12:00:00+02:00",
+          "employmentType": "PART_TIME",
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": "LogicNodes",
+            "sameAs": "https://logicnodes.ai",
+            "logo": "https://logicnodes.ai/favicon.svg"
+          },
+          "jobLocation": {
+            "@type": "Place",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Sletvej 2D",
+              "addressLocality": "Tranbjerg",
+              "postalCode": "8310",
+              "addressCountry": "DK"
             }
-          })}
+          }
+        })}>
         </script>
       </>
     ))}
