@@ -10,13 +10,13 @@ interface VideoCase {
   name: string;
   role: string;
   flip?: boolean;
-  poster?: string; // optional placeholder image before play
+  poster?: string;
 }
 
 const VIDEO_CASES: VideoCase[] = [
   {
     src: 'https://logicnodes-cdn.b-cdn.net/Case%20Mercura.mp4',
-    poster: '/images/mercura-poster.png', // <— replace with actual placeholder path
+    poster: '/images/mercura-poster.png',
     label: 'MØD MARTIN FRA MERCURA',
     heading: 'Hør hvordan Mercura gik fra skeptisk til "taget med storm"',
     quote: 'Alle har være præget af en lille smule skepsis, men vi er faktisk nået lang længere end vi turde håbe på.',
@@ -69,7 +69,7 @@ const VIDEO_CASES: VideoCase[] = [
               "description": c.quote,
               "thumbnailUrl": c.poster ?? "/images/platform-image.png",
               "contentUrl": c.src,
-              "uploadDate": "2025-06-04",
+              "uploadDate": "2025-06-04T12:00:00+02:00",
               "publisher": {
                 "@type": "Organization",
                 "name": "LogicNodes",
