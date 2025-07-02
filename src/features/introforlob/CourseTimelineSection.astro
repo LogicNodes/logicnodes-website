@@ -1,0 +1,88 @@
+---
+import { COURSE_PARTS } from './course.data';
+import Icon from '@lib/Icon.astro';
+import Card from '@components/Card.astro';
+---
+
+<section class="bg-ln-dark py-section px-gutter text-white">
+  <div class="max-w-7xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center space-y-4 mb-16">
+      <h2 class="text-heading-xl font-extrabold">
+        Forløbets 4 dele
+      </h2>
+      <p class="text-body-lg text-white/80 max-w-3xl mx-auto">
+        Et struktureret forløb der tager jer fra første indsigt til konkret handlingsplan
+      </p>
+    </div>
+
+    <!-- Timeline Layout: 70% content, 30% timeline -->
+    <div class="grid lg:grid-cols-[70%_30%] gap-12 lg:gap-16">
+      <!-- Content Area (70%) -->
+      <div class="space-y-8">
+        {COURSE_PARTS.map((part) => (
+          <Card class="space-y-6" id={`part-${part.number}`}>
+            <!-- Part Header -->
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 rounded-full bg-ln-accent flex items-center justify-center">
+                <span class="text-white font-bold text-lg">{part.number}</span>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-heading-lg font-extrabold text-ln-dark mb-2">
+                  {part.title}
+                </h3>
+                <p class="text-ln-accent font-semibold text-sm uppercase tracking-wider">
+                  {part.duration}
+                </p>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="text-body text-ln-dark/90 leading-relaxed ml-16">
+              {part.description}
+            </p>
+
+            <!-- Benefits -->
+            <div class="ml-16 space-y-3">
+              <p class="font-semibold text-ln-dark">I får:</p>
+              <ul class="space-y-2">
+                {part.benefits.map((benefit) => (
+                  <li class="flex items-start gap-3">
+                    <span class="text-ln-accent mt-1 flex-shrink-0">•</span>
+                    <span class="text-body text-ln-dark/80">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <!-- Timeline Visual (30%) -->
+      <div class="hidden lg:block relative">
+        <div class="sticky top-8">
+          <!-- Timeline Line -->
+          <div class="absolute left-6 top-6 bottom-6 w-0.5 bg-ln-accent/30"></div>
+          
+          <!-- Timeline Points -->
+          <div class="space-y-24">
+            {COURSE_PARTS.map((part) => (
+              <div class="relative flex items-center">
+                <!-- Timeline Dot -->
+                <div class="w-12 h-12 rounded-full bg-ln-accent border-4 border-ln-dark flex items-center justify-center relative z-10">
+                  <span class="text-white font-bold text-sm">{part.number}</span>
+                </div>
+                
+                <!-- Timeline Label -->
+                <div class="ml-4">
+                  <p class="text-white font-semibold text-sm">{part.title}</p>
+                  <p class="text-white/60 text-xs">{part.duration.split('–')[0].trim()}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

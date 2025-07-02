@@ -1,0 +1,27 @@
+---
+// src/pages/introforloeb.astro
+import BaseLayout from '../layout/BaseLayout.astro';
+import IntroforlobHero from '@features/introforlob/IntroforlobHero.astro';
+import CourseTimelineSection from '@features/introforlob/CourseTimelineSection.astro';
+import FAQSection from '@features/introforlob/FAQSection.astro';
+import ContactSection from '@features/contact/ContactSection.astro';
+---
+
+<BaseLayout 
+  title="Introforløb: AI-omstilling og plan på 1 uge – LogicNodes"
+  description="Få AI-overblik, forståelse og handleplan på én uge. Fast pris: 12.500 kr. Book nu og kickstart jeres AI-rejse med LogicNodes."
+>
+  <IntroforlobHero />
+  <CourseTimelineSection />
+
+  <!-- Extra spacing before contact section -->
+  <div class="py-8"></div>
+
+  <ContactSection
+    headline="Klar til at kickstarte AI-rejsen?"
+    description="Har du spørgsmål før du booker? Skriv til os – vi svarer samme dag."
+    showBookingButton={false}
+    pageSource="introforloeb"
+  />
+  <FAQSection />
+</BaseLayout>

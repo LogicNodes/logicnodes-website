@@ -3,8 +3,6 @@
 **Få overblik, forståelse og en konkret plan – på én uge.**   
 Introforløbet kickstarter jeres AI-omstilling: I får både en fælles forståelse af mulighederne og en konkret plan for, hvor det giver mest værdi at starte. Det kræver kun et par timer med de rette personer.
 
-**Fast pris: 12.500 kr. ekskl. moms**
-
 \[Book forløbet\]
 
 ---
@@ -17,7 +15,7 @@ Introforløbet kickstarter jeres AI-omstilling: I får både en fælles forståe
 
 **Fysisk møde – ca. 1,5 time**
 
-Et praksisnært oplæg, der sikrer fælles forståelse blandt ledelse og nøglepersoner. Vi gennemgår hvad AI egentlig er, hvornår det skaber værdi – og hvad der adskiller simple assistenter fra avancerede automatiseringer.
+Et praksisnært oplæg, der sikrer fælles forståelse blandt ledelse og nøglepersoner. Vi gennemgår hvad AI egentlig er, hvordan det skaber værdi – og hvad der adskiller simple assistenter fra avancerede automatiseringer.
 
 **I får:**
 
@@ -80,6 +78,7 @@ Vi samler alt i en visuel oversigt over jeres AI-muligheder – og rangerer dem 
 **Alt-tekst:** "Udsnit af løsningsmatrice med vurdering af AI-projekter på tværs af gevinst og gennemførbarhed"
 
 ---
+kontaktformular:
 
 ## Book eller spørg – helt enkelt
 
