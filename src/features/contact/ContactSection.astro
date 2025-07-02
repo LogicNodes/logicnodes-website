@@ -8,7 +8,22 @@
 // -----------------------------------------------------------------
 
 import Icon from '@lib/Icon.astro';
+import Button from '@components/Button.astro';
 import { EMAIL_JS, CONTACT_INFO } from './contact.data';
+
+export interface Props {
+  headline?: string;
+  description?: string;
+  showBookingButton?: boolean;
+  pageSource?: string;
+}
+
+const {
+  headline = "Kom i kontakt med en AI-ekspert",
+  description = "Udfyld formularen her, så kontakter en af vores AI-eksperter dig.",
+  showBookingButton = false,
+  pageSource = "general"
+} = Astro.props;
 ---
 
 <section id="kontakt" class="bg-ln-light pt-8 pb-section px-gutter">
@@ -20,14 +35,32 @@ import { EMAIL_JS, CONTACT_INFO } from './contact.data';
       <div
         class="bg-ln-dark text-white rounded-2xl p-8 md:p-10 shadow-xl space-y-6">
         <h2 class="text-heading-lg leading-tight font-extrabold">
-          Kom i kontakt med en<br />
-          <span class="text-ln-accent">AI-ekspert</span>
+          {headline.includes("AI-ekspert") ? (
+            <>
+              {headline.split("AI-ekspert")[0]}<br />
+              <span class="text-ln-accent">AI-ekspert</span>
+            </>
+          ) : (
+            headline
+          )}
         </h2>
-  
+
         <p class="text-body">
-          Udfyld formularen her, så kontakter en af vores AI-eksperter dig.
+          {description}
         </p>
-  
+
+        {showBookingButton && (
+          <div class="pt-2">
+            <Button
+              href="/kontakt#book"
+              variant="primary"
+              size="md"
+            >
+              Book en tid nu
+            </Button>
+          </div>
+        )}
+
         <ul class="space-y-3 text-body">
           <li class="flex items-center gap-3">
             <Icon name="mail" class="w-5 h-5" />
@@ -54,6 +87,8 @@ import { EMAIL_JS, CONTACT_INFO } from './contact.data';
       >
         <!-- invisible honeypot -->
         <input type="text" name="bot-field" class="hidden" />
+        <!-- hidden field for page source tracking -->
+        <input type="hidden" name="page_source" value={pageSource} />
   
         <!-- fields -->
         <div class="grid gap-4">
@@ -99,8 +134,7 @@ import { EMAIL_JS, CONTACT_INFO } from './contact.data';
   
         <button
           type="submit"
-          class="bg-ln-accent text-white font-semibold py-2.5 px-12 rounded-2xl
-                 hover:bg-ln-accent-dark transition self-start"
+          class="font-semibold rounded-2xl transition inline-block text-center py-3 px-6 bg-ln-accent text-white hover:bg-ln-accent-dark self-start"
         >
           Send
         </button>

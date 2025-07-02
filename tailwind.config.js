@@ -25,6 +25,8 @@ module.exports = {
         'heading-xl': ['2.5rem', { lineHeight: '1.2' }],
         'heading-lg': ['2rem', { lineHeight: '1.3' }],
         'heading-md': ['1.5rem', { lineHeight: '1.4' }],
+        'heading-sm': ['1.25rem', { lineHeight: '1.4' }],
+        'body-lg': ['1.125rem', { lineHeight: '1.75' }],
         body: ['1rem', { lineHeight: '1.75' }],
         sm: ['0.875rem', { lineHeight: '1.5' }],
       },

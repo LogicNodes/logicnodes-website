@@ -1,0 +1,25 @@
+---
+// src/pages/ekspertise.astro
+import BaseLayout from '../layout/BaseLayout.astro';
+import ExpertiseHero from '@features/ekspertise/ExpertiseHero.astro';
+import ExpertiseSection from '@features/ekspertise/ExpertiseSection.astro';
+import TrustSection from '@features/trust/TrustSection.astro';
+import FAQSection from '@features/ekspertise/FAQSection.astro';
+import ContactSection from '@features/contact/ContactSection.astro';
+---
+
+<BaseLayout 
+  title="Vores AI-ekspertise | LogicNodes"
+  description="Se hvordan vi gør AI konkret og værdiskabende for mellemstore virksomheder. Fra strategi til skræddersyede løsninger."
+>
+  <ExpertiseHero />
+  <ExpertiseSection />
+  <TrustSection />
+  <ContactSection
+    headline="Få konkret sparring på jeres AI-muligheder"
+    description="Lad os hjælpe jer med at identificere hvor AI kan skabe størst værdi i jeres virksomhed."
+    showBookingButton={true}
+    pageSource="ekspertise"
+  />
+  <FAQSection />
+</BaseLayout>

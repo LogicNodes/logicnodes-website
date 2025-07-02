@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { LOGOS } from './logos.data';
+import Button from '@components/Button.astro';
 
 interface VideoCase {
   src: string;
@@ -11,6 +12,7 @@ interface VideoCase {
   role: string;
   flip?: boolean;
   poster?: string;
+  caseUrl?: string;
 }
 
 const VIDEO_CASES: VideoCase[] = [
@@ -22,6 +24,7 @@ const VIDEO_CASES: VideoCase[] = [
     quote: 'Alle har være præget af en lille smule skepsis, men vi er faktisk nået lang længere end vi turde håbe på.',
     name: 'Martin Johansen',
     role: 'Founder, Mercura',
+    caseUrl: '/ekspertise/mercura',
   },
   {
     src: 'https://logicnodes-cdn.b-cdn.net/Case%20R%26M%20_%20Smart%20CSRD.mp4',
@@ -33,6 +36,7 @@ const VIDEO_CASES: VideoCase[] = [
     name: 'Carsten Raundahl',
     role: 'CEO, Raundahl & Moesby',
     flip: true,
+    caseUrl: '/ekspertise/R&M',
   },
 ];
 ---
@@ -92,11 +96,23 @@ const VIDEO_CASES: VideoCase[] = [
               <p class="text-body leading-relaxed text-ln-dark">{c.quote}</p>
             </div>
 
-            <footer class="text-sm font-semibold text-ln-dark/80">
-              {c.name}
-              <br />
-              <span class="font-normal">{c.role}</span>
-            </footer>
+            <div class="flex items-center justify-between">
+              <footer class="text-sm font-semibold text-ln-dark/80">
+                {c.name}
+                <br />
+                <span class="font-normal">{c.role}</span>
+              </footer>
+
+              {c.caseUrl && (
+                <Button
+                  href={c.caseUrl}
+                  variant="primary"
+                  size="sm"
+                >
+                  Se casen
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       ))}

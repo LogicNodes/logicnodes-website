@@ -1,0 +1,76 @@
+---
+// src/features/ekspertise/ExpertiseSection.astro
+import { EXPERTISE_AREAS } from './ekspertise.data';
+import Card from '@components/Card.astro';
+import Button from '@components/Button.astro';
+---
+
+{EXPERTISE_AREAS.map((area, index) => (
+  <section class={`py-section px-gutter ${index % 2 === 1 ? 'bg-ln-dark' : 'bg-ln-light'}`}>
+    <div class={`max-w-7xl mx-auto grid gap-12 lg:gap-20 ${index % 2 === 0 ? 'lg:grid-cols-[1fr_2fr]' : 'lg:grid-cols-[2fr_1fr]'}`}>
+        <!-- Ikon/grafik sektion -->
+        <div class={`flex items-center justify-center ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+          <div class={`w-64 h-64 rounded-full flex items-center justify-center ${index % 2 === 1 ? 'bg-white/10' : 'bg-ln-accent/10'}`}>
+            <!-- Placeholder for ikon - kan erstattes med faktiske ikoner senere -->
+            <div class={`w-32 h-32 rounded-full flex items-center justify-center ${index % 2 === 1 ? 'bg-white/20' : 'bg-ln-accent/20'}`}>
+              <span class="text-ln-accent text-4xl font-bold">
+                {area.icon.name === 'brain-checklist' && '🧠'}
+                {area.icon.name === 'chat-gear' && '💬'}
+                {area.icon.name === 'robot-screen' && '🤖'}
+                {area.icon.name === 'diagram-code' && '📊'}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Indhold sektion -->
+        <div class={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+          <Card class="space-y-6 h-full">
+            <div class="space-y-4">
+              <h2 class="text-heading-lg font-extrabold text-ln-dark">
+                {area.title}
+              </h2>
+              <h3 class="text-heading-md font-bold text-ln-accent">
+                {area.subtitle}
+              </h3>
+              <p class="text-body text-ln-dark/80 leading-relaxed">
+                {area.description}
+              </p>
+            </div>
+
+            <!-- Features liste -->
+            <div class="space-y-3">
+              <p class="font-semibold text-ln-dark">Vi hjælper med:</p>
+              <ul class="space-y-2">
+                {area.features.map((feature) => (
+                  <li class="flex items-start gap-3">
+                    <span class="text-ln-accent mt-1">•</span>
+                    <span class="text-body text-ln-dark/80">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Links -->
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button
+                href={area.secondaryLink.url}
+                variant="primary"
+                size="md"
+              >
+                {area.secondaryLink.text}
+              </Button>
+              <Button
+                href={area.primaryLink.url}
+                variant="secondary"
+                size="md"
+              >
+                {area.primaryLink.text}
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </section>
+))}
