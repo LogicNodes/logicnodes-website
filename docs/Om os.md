@@ -6,13 +6,13 @@ LogicNodes er sat i verden for én ting: At gøre AI konkret, ansvarlig og anven
 
 ## Vores værdier
 
-**Værdiskabelse som ledestjerne**  
+**Værdiskabelse først**  
 Vi anbefaler kun løsninger, vi selv ville have valgt, hvis vi stod i jeres situation. Vi gør en ekstra indsats for at finde det, der skaber maksimal værdi for jer, og skærer alt overflødigt væk.
 
 **Respekt for jeres tid**  
 Vi stræber efter, at hver time brugt med LogicNodes bringer jer tættere på jeres mål. Når man går fra et møde med os, skal man altid føle, at det var tiden værd.
 
-**Sikkerhed og ansvarlighed**  
+**Ansvarlig teknologi**  
 Vi bygger kontrol, sporbarhed og dokumentation ind fra starten. Alle data, vi henter for at kunne hjælpe jer bedst muligt, bliver behandlet fortroligt og ansvarligt.
 
 **Grafikforslag:**
